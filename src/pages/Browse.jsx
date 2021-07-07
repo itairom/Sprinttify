@@ -2,12 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { useDispatch } from "react-redux"
 
-export const Home = () => {
+export const Browse = () => {
     const dispatch = useDispatch()
 
     return (
-        <section className="main-container main-home">
-            <h1>Home</h1>
+        <section className="main-container main-browse">
+            <h1>Browse</h1>
         </section>
     )
 }

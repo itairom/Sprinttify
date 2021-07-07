@@ -11,4 +11,11 @@
 
 // CMPS
 
-@import "cmps/header"
+@import "cmps/header";
+@import "cmps/navbar";
+
+//PAGES
+
+@import "pages/home";
+@import "pages/browse";
+@import "pages/likedSongs";
