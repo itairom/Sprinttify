@@ -1,0 +1,46 @@
+.main-nav {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 49px 26px 0 34px ;
+    position: fixed;
+    background-color: white;
+    left: 0;
+    top: 0;
+    
+    .nav-logo{
+        margin-left: 31px;
+        margin-bottom: 11px;
+    }
+    .nav-btn {
+
+        background-color: white;
+        font-size: 18px;
+        border-radius: 10px;
+        padding: 16px 0;
+        width: 210px;
+        &.active{
+            background-color: #ddf5e5;
+        }
+        &:hover{
+            background-color: #ddf5e5;
+        }
+            
+
+        a{
+            display: flex;
+            align-items: center;
+        }
+        
+        img{
+            
+            width: 21px;
+            height: 21px;
+            margin-left: 30px;
+            margin-right: 21px;
+        }
+        
+        
+    }
+    
+}

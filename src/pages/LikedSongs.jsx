@@ -2,12 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import { useDispatch } from "react-redux"
 
-export const Home = () => {
+export const LikedSongs = () => {
     const dispatch = useDispatch()
 
     return (
-        <section className="main-container main-home">
-            <h1>Home</h1>
+        <section className="main-container main-liked">
+            <h1>LikedSongs</h1>
         </section>
     )
 }
