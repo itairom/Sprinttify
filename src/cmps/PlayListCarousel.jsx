@@ -76,14 +76,11 @@ const _PlayListCarousel = ({playlistName}) => {
     const [currCarousel, setcurrCarousel] = useState([])
 
     useEffect(() => {
-        console.log('in')
         playlistPaging()
-        console.log(currCarousel);
     }, [currPage])
 
     const playlistPaging = () => {
         const playlist = gPlaylists.slice(currPage, currPage + 5)
-        console.log("🚀 ~ file: PlayListCarousel.jsx ~ line 85 ~ playlistPaging ~ playlist", playlist)
         // return playlist
         setcurrCarousel(playlist)
     }

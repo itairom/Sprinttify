@@ -6,7 +6,7 @@ export const playlistService = {
 
 async function apiTest() {
     try {
-        const resp = await axios.get('https://yesno.wtf/api')
+        const resp = await axios.get('http://api.sprintt.co/spotify/',options)
         return resp.data
     }
     catch {
@@ -14,3 +14,7 @@ async function apiTest() {
     }
 
 }
+
+const options = {
+    headers:{'user-access-token': '1e6be782-0600-4b32-9674-5a4488ae6cd4'}
+  };
