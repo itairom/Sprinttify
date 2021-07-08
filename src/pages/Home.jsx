@@ -29,7 +29,7 @@ export const Home = () => {
     return (
         <section className="main-container main-home">
             <PlayListCarousel playlists={playlists[0]} key="featuredPlaylist" playlistName="Featured Playlists" />
-            <PlayListCarousel playlists={playlists[1]} key="Recently Played" playlistName="Recently Played" />
+            <PlayListCarousel playlists={playlists[1]} key="RecentlyPlayed" playlistName="Recently Played" />
             <PlayListCarousel playlists={playlists[2]} key="Mood" playlistName="Mood" />
         </section>
     )

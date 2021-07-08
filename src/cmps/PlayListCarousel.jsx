@@ -46,7 +46,7 @@ const _PlayListCarousel = ({playlistName,playlists}) => {
 
             <div className='playlist-carousel'>
                 {currCarousel.map(playlist =>
-                    <PlayList key={playlist._id} playlist={playlist} />
+                    <PlayList key={playlist.playlist_id} playlist={playlist} />
                 )}
             </div>
         </div>
