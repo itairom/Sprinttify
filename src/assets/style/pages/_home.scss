@@ -1,6 +1,9 @@
-.main-home{
-    height: 100vh;
-    background-color:#edf6ed
-    
+.main-home {
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    background-color: #edf6ed;
+    margin-left: 270px;
 }
-

@@ -7,11 +7,11 @@ import thunk from 'redux-thunk';
 
 import * as serviceWorker from './serviceWorker';
 
-// import CarReducer from './reducers/CarReducer';
+import PlaylistReducer from './reducers/PlaylistReducer';
 import App from './App';
 
 const rootReducer = combineReducers({
-    // carModule: CarReducer,
+    playlistModule:PlaylistReducer
 });
 
 

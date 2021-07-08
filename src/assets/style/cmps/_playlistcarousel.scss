@@ -1,0 +1,44 @@
+.main-carousel {
+    display: flex;
+    flex-direction: column;
+    margin:  0 60px;
+    .top-section {
+        p {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .nav-btn {
+            & > * {
+                stroke: #C4C4C4;
+                
+            }
+        }
+        .nav-btn.active {
+            & > * {
+                stroke: #000000;
+                
+            }
+        }
+    }
+    
+    &.active{
+        stroke: #191414;
+    }
+    .playlist-carousel {
+        display: flex;
+        & > .playlist-card {
+            margin-right: 60px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+            // &:first-child {
+            //     margin-left: 60px;
+            // }
+        }
+    }
+}
