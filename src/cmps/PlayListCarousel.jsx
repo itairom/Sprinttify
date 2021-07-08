@@ -69,7 +69,7 @@ const gPlaylists =
 
 
 
-const _PlayListCarousel = () => {
+const _PlayListCarousel = ({playlistName}) => {
 
     const [currPage, setCurrPage] = useState(0)
     const [arrowState, setArrowState] = useState('left')
@@ -103,7 +103,7 @@ const _PlayListCarousel = () => {
     return (
         <div className='main-carousel'>
             <div className="top-section">
-                <p>Recently played</p>
+                <p>{playlistName}</p>
                 <div className="navs">
                     <LeftNav className={arrowState === 'left' ? 'nav-btn ' : 'nav-btn active'}
                         onClick={() => { setNavBtn(0, 'left') }} />
