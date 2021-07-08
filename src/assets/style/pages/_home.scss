@@ -1,6 +1,7 @@
 .main-home {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     height: 100vh;
     background-color: #edf6ed;
-    display: flex;
-    justify-content: center;
 }

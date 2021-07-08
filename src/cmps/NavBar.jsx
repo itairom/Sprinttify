@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { Link, useHistory, useLocation, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../assets/imgs/logo.svg'
 
 
 
 export function NavBar() {
-    const [isMobile, setIsMobile] = useState(false)
     const [toggleState, setToggleState] = useState('home');
 
 
