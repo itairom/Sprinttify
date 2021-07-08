@@ -1,20 +1,25 @@
-import axios from 'axios'
+import { axiosService } from '../services/axiosService'
 
 export const playlistService = {
-    apiTest
-}
 
-async function apiTest() {
-    try {
-        const resp = await axios.get('http://api.sprintt.co/spotify/',options)
-        return resp.data
-    }
-    catch {
-        console.log('error');
-    }
+    query
+
+
 
 }
 
-const options = {
-    headers:{'user-access-token': '1e6be782-0600-4b32-9674-5a4488ae6cd4'}
-  };
+async function query() {
+
+    const playlists = []
+    const featuredPlaylist = await axiosService.getFeaturedPlaylist()
+    const moodPlaylist = await axiosService.getMoodPlaylist()
+    const recentlyPlayedPlaylist = await axiosService.getRecentlyPlayedPlaylist()
+    playlists.push(featuredPlaylist.playlists)
+    playlists.push(recentlyPlayedPlaylist.playlists)
+    playlists.push(moodPlaylist.playlists)
+    return playlists
+}
+
+
+
+
