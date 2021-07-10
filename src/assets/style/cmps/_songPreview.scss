@@ -1,0 +1,21 @@
+.song-card {
+    padding: 16px 0;
+    align-items: center;
+    margin-left: 116px;
+    border-bottom: 0.5px solid #646464;
+    .heart {
+        margin: 0 57px 0 12px;
+    }
+    .song-title {
+        flex-basis: 450px;
+    }
+    .song-artist {
+        flex-basis: 270px;
+    }
+    .song-album {
+        flex-basis: 260px;
+    }
+    .song-date {
+        flex-basis: 125px;
+    }
+}

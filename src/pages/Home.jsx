@@ -1,29 +1,32 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { PlayListCarousel } from '../cmps/PlayListCarousel'
 import { playlistService } from '../services/playlistService'
 import { loadFeatured } from '../actions/PlaylistAction'
-import { axiosService } from '../services/axiosService'
 export const Home = () => {
 
     const dispatch = useDispatch()
-    const [test, setTest] = useState('')
     const [playlists, setPlaylists] = useState([])
-    const { filterBy } = useSelector(state => state.playlistModule)
+    const { filterBy, featuredPlaylist } = useSelector(state => state.playlistModule)
 
     // useEffect(() => {
-    //     dispatch(loadFeatured())
-    // }, [])
+    //     dispatch(loadFeatured(filterBy))
+    // }, [filterBy])
 
-    useEffect(async () => {
-        const res = await playlistService.query()
-        setPlaylists(res)
-        return ()=>{}
-    },[])
+    // useEffect(() => {
+    //     console.log(featuredPlaylist);
+    // }, [featuredPlaylist])
+
+    useEffect(() => {
+        (async function () {
+            const res = await playlistService.query()
+            setPlaylists(res)
+        }())
+    }, [])
 
     useEffect(() => {
         console.log(playlists);
-        return ()=>{}
+        return () => { }
     }, [playlists])
 
     return (

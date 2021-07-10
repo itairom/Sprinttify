@@ -17,19 +17,27 @@ const _PlayListCarousel = ({playlistName,playlists}) => {
         return ()=>{}
     }, [playlists])
 
+    // useEffect(() => {
+    //     console.log('in');
+    //     return ()=>{}
+    // }, [currCarousel])
+
+
+
     const playlistPaging = () => {
-        const playlist = playlists.slice(currPage, currPage + 5)
+        const currDisplay = playlists.slice(currPage, currPage + 5)
+        // console.log("🚀 ~ file: PlayListCarousel.jsx ~ line 22 ~ playlistPaging ~ currDisplay", currDisplay)
         // return playlist
-        setcurrCarousel(playlist)
+        setcurrCarousel(currDisplay)
     }
 
     const setNavBtn = (num, direction) => {
-        setCurrPage(num)
         setArrowState(direction)
         setCurrPage(num)
         if (playlists.length < 6) {
             setArrowState('')
         }
+        playlistPaging()
     }
 
     return (

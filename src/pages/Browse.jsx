@@ -1,9 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
-
-import { useDispatch } from "react-redux"
+import React, { useState } from 'react'
 
 export const Browse = () => {
-    const dispatch = useDispatch()
 
     return (
         <section className="main-container main-browse">

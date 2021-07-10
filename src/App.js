@@ -13,9 +13,9 @@ function App() {
     <div className="content-wrapper">
       <NavBar />
       <Switch>
-        <Route path="/playlist" component={ PlayListPage } />
-        <Route path="/home" component={ Home } />
-        <Route path="/browse" component={ Browse } />
+        <Route exact path="/home/:id" component={ PlayListPage } />
+        <Route exact path="/home" component={ Home } />
+        <Route exact path="/browse" component={ Browse } />
         <Route path="/likedsongs" component={ LikedSongs } />
       </Switch>
     </div>
