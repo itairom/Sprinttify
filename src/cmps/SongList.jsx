@@ -10,7 +10,7 @@ const _SongList = ({ playlistTracks }) => {
         // if(!playlistTracks) return
         console.log(playlistTracks);
     })
-
+    
 
     return (
         <div className='song-list'>

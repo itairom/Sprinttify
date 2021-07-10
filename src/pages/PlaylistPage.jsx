@@ -15,6 +15,10 @@ export const PlayListPage = ({ match }) => {
     
 
     useEffect(() => {
+        console.log('filtering');
+
+    }, [filterBy])
+    useEffect(() => {
         const loadPlaylist = async () => {
             dispatch(getPlaylistTracks(id))
             if (playlistTracks) {
@@ -24,7 +28,7 @@ export const PlayListPage = ({ match }) => {
         }
         loadPlaylist()
 
-    }, [filterBy])
+    }, [])
 
     return (
         <section className="main-container main-playlist">
