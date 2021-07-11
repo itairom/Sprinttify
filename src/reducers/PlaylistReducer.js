@@ -1,17 +1,38 @@
 const initialState = {
     featuredPlaylist: [],
-    mooddPlaylist: [],
+    moodPlaylist: [],
     recentlyPlayedPlaylist: [],
-    filterBy: null
+    filterBy: null,
+    playlistTracks: [],
+    playlistDuration:null,
+    headerInfo:null
 }
-
 export default function PlaylistReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_FEATURED':
-            console.log(action.featuredPlaylist);
             return {
                 ...state,
-                featuredPlaylist: action.featuredPlaylist
+                featuredPlaylist: action.featuredPlaylist.playlists
+            }
+        case 'SET_PLAYLIST_TRACKS':
+            return {
+                ...state,
+                playlistTracks: action.tracks
+            }
+        case 'SET_PLAYLIST_DURATION':
+            return {
+                ...state,
+                playlistDuration: action.tracks
+            }
+        case 'SET_PLAYLIST_HEADER':
+            return {
+                ...state,
+                headerInfo: action.headerInfo
+            }
+        case 'SET_FILTER':
+            return {
+                ...state,
+                filterBy: action.filterBy
             }
         default:
             return state;

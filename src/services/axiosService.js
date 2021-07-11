@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const axiosService = {
-    getFeaturedPlaylist, getMoodPlaylist, getRecentlyPlayedPlaylist
+    getFeaturedPlaylist, getMoodPlaylist, getRecentlyPlayedPlaylist, getPlaylistTracks
 }
 
 async function getFeaturedPlaylist() {
@@ -26,6 +26,15 @@ async function getMoodPlaylist() {
 async function getRecentlyPlayedPlaylist() {
     try {
         const resp = await axios.get('https://api.sprintt.co/music/recently_played_playlists', options)
+        return resp.data
+    }
+    catch (err) {
+        throw err
+    }
+}
+async function getPlaylistTracks(id) {
+    try {
+        const resp = await axios.get(`https://api.sprintt.co/music/playlist_tracks/${id}`, options)
         return resp.data
     }
     catch (err) {

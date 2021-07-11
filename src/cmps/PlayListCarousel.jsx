@@ -8,7 +8,7 @@ const _PlayListCarousel = ({playlistName,playlists}) => {
 
     const [currPage, setCurrPage] = useState(0)
     const [arrowState, setArrowState] = useState('left')
-    const [currCarousel, setcurrCarousel] = useState([])
+    const [currCarousel, setCurrCarousel] = useState([])
 
     useEffect(() => {
         if(playlists){
@@ -18,18 +18,17 @@ const _PlayListCarousel = ({playlistName,playlists}) => {
     }, [playlists])
 
     const playlistPaging = () => {
-        const playlist = playlists.slice(currPage, currPage + 5)
-        // return playlist
-        setcurrCarousel(playlist)
+        const currDisplay = playlists.slice(currPage, currPage + 5)
+        setCurrCarousel(currDisplay)
     }
 
     const setNavBtn = (num, direction) => {
-        setCurrPage(num)
         setArrowState(direction)
         setCurrPage(num)
         if (playlists.length < 6) {
             setArrowState('')
         }
+        playlistPaging()
     }
 
     return (
@@ -46,7 +45,7 @@ const _PlayListCarousel = ({playlistName,playlists}) => {
 
             <div className='playlist-carousel'>
                 {currCarousel.map(playlist =>
-                    <PlayList key={playlist._id} playlist={playlist} />
+                    <PlayList key={playlist.playlist_id} playlist={playlist} />
                 )}
             </div>
         </div>

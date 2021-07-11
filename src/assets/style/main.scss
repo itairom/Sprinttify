@@ -15,9 +15,19 @@
 @import "cmps/navbar";
 @import "cmps/playlist";
 @import "cmps/playlistcarousel";
+@import "cmps/playlistHeader";
+@import "cmps/songList";
+@import "cmps/songPreview";
+@import "cmps/songFilter";
+@import "cmps/playbackBar/leftPlayback\ ";
+@import "cmps/playbackBar/mainPlayback";
+@import "cmps/playbackBar/playbackControl";
+@import "cmps/playbackBar/playbackProgressBar";
+@import "cmps/playbackBar/volumeBar";
 
 //PAGES
 
 @import "pages/home";
 @import "pages/browse";
 @import "pages/likedSongs";
+@import "pages/playlistPage";
