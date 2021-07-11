@@ -11,26 +11,9 @@ export const PlayListPage = ({ match }) => {
     const { playlistTracks, playlistDuration, filterBy } = useSelector(state => state.playlistModule)
     const { id } = match.params
 
-    const [localPlaylistTracks, setLocalPlaylistTracks] = useState([])
-
-    // useEffect(() => {
-    //     // console.log(localPlaylistTracks);
-    //     console.log(filterBy?.songName);
-    //       let localFilterd=localPlaylistTracks
-    //     if (filterBy?.songName>0) {
-    //         localFilterd = localPlaylistTracks?.filter(track => { track.name.toLowerCase().includes(filterBy.songName.toLowerCase())})
-    //     }
-    //     console.log(localPlaylistTracks);
-    //     return setLocalPlaylistTracks(localPlaylistTracks)
-    // }, [filterBy])
-
     useEffect(() => {
         const loadPlaylist = async () => {
             dispatch(getPlaylistTracks(id, filterBy))
-            // if (playlistTracks) {
-            //     setLocalPlaylistTracks(playlistTracks)
-            // }
-            // else return
         }
         loadPlaylist()
     }, [filterBy])
@@ -47,7 +30,6 @@ export const PlayListPage = ({ match }) => {
                 <p className="head-date" >DATE</p>
             </div>
             <PlaylistHeader playlistDuration={playlistDuration} />
-            {/* <SongList playlistTracks={localPlaylistTracks} /> */}
             <SongList playlistTracks={playlistTracks} />
         </section>
     )

@@ -1,13 +1,13 @@
-import React, { useEffect }  from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
 
-export const PlaylistHeader = ({playlistDuration}) => {
-    const { headerInfo,playlistTracks } = useSelector(state => state.playlistModule)
+export const PlaylistHeader = ({ playlistDuration }) => {
+    const { headerInfo, playlistTracks } = useSelector(state => state.playlistModule)
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(headerInfo);
-    },[headerInfo])
+    }, [headerInfo])
 
     return (
         <nav className="playlist-header flex">
@@ -17,7 +17,7 @@ export const PlaylistHeader = ({playlistDuration}) => {
             </div>
             <div className="right-header flex">
                 <p>
-                {playlistTracks.length}
+                    {playlistTracks.length}
                     <span> Songs</span>
                 </p>
                 <p>{playlistDuration}</p>

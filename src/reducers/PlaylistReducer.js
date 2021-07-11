@@ -7,8 +7,6 @@ const initialState = {
     playlistDuration:null,
     headerInfo:null
 }
-//SET_MOOD
-//SET_RECENTLY
 export default function PlaylistReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_FEATURED':
@@ -19,17 +17,17 @@ export default function PlaylistReducer(state = initialState, action) {
         case 'SET_PLAYLIST_TRACKS':
             return {
                 ...state,
-                playlistTracks: action.tracks//.tracks
+                playlistTracks: action.tracks
             }
         case 'SET_PLAYLIST_DURATION':
             return {
                 ...state,
-                playlistDuration: action.tracks//.playlist_duration
+                playlistDuration: action.tracks
             }
         case 'SET_PLAYLIST_HEADER':
             return {
                 ...state,
-                headerInfo: action.headerInfo//.playlist_duration
+                headerInfo: action.headerInfo
             }
         case 'SET_FILTER':
             return {

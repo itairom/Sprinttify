@@ -17,9 +17,6 @@ const _PlayListCarousel = ({playlistName,playlists}) => {
         return ()=>{}
     }, [playlists])
 
-
-
-
     const playlistPaging = () => {
         const currDisplay = playlists.slice(currPage, currPage + 5)
         setCurrCarousel(currDisplay)
