@@ -1,5 +1,5 @@
 .song-card {
-    z-index: 100;
+    z-index: 2;
     align-items: center;
     margin-left: 54px;
     // font-size: 22px;
@@ -15,7 +15,7 @@
     }
 
         .preview-control{
-            // visibility: hidden;
+            visibility: hidden;
             margin-left: 23px;
             
             .play-btn {

@@ -1,0 +1,51 @@
+.control-container {
+    position: fixed;
+
+    left: 500;
+    bottom: 0;
+    margin-bottom: 40px;
+    margin-left: 715px;
+    left: auto;
+    right: auto;
+    z-index: 5;
+    // width: 400px;
+    display: flex;
+    align-items: center;
+
+    .play-pause {
+        margin-top: 7px;
+        .pause-btn {
+            :hover {
+                fill: #778c6b;
+            }
+        }
+        .play-btn {
+            :hover {
+                stroke: #778c6b;
+            }
+        }
+    }
+
+    & > * {
+        margin-right: 65px;
+        &:last-child{
+            margin-right:0
+        }
+    }
+}
+
+.backward-btn {
+    :hover {
+        stroke: #778c6b;
+    }
+
+    // fill: #778c6b;
+    // path {
+    // }
+}
+
+.forward-btn {
+    :hover {
+        stroke: #778c6b;
+    }
+}
