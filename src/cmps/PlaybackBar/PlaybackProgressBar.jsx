@@ -1,8 +1,6 @@
 
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { LeftPlaybackBar } from './LeftPlaybackBar'
-import { PlaybackControl } from './PlaybackControl'
 
 export const PlaybackProgressBar = () => {
 

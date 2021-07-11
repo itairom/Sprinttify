@@ -1,25 +1,27 @@
-.main-progress-bar {
+.volume-bar {
     position: fixed;
-
-    bottom: 0;
-    margin-bottom: 18px;
-    margin-left: 438px;
-    width: 810px;
     display: flex;
+    bottom: 0;
+    right: 0;
+    margin-right: 100px;
+    margin-bottom: 36px;
+    z-index: 3;
     align-items: center;
-    p {
-        font-size: 18px;
-        margin-right: 10px;
-        &:last-child {
-            margin-left: 10px;
-            margin-right: 0px;
+    .volume-container{
+        margin-top: 5px;
+        .volume-icon {
+            margin-right: 10px;
+            height: 20px;
+            width: 18.5px;
         }
+        
     }
     progress {
+        width: 100px;
         -webkit-appearance: none;
-        width: 623px;
-        height: 5px;
+        height: 6px;
         border-radius: 11px;
+        // margin-left: 10px;
         &::-webkit-progress-bar {
             background-color: #c4c4c4;
             border-radius: 11px;
