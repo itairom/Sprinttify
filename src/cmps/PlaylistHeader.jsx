@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 export const PlaylistHeader = ({ playlistDuration }) => {
     const { headerInfo, playlistTracks } = useSelector(state => state.playlistModule)
 
-    useEffect(() => {
-        console.log(headerInfo);
-    }, [headerInfo])
+    // useEffect(() => {
+    //     console.log(headerInfo);
+    // }, [headerInfo])
 
     return (
         <nav className="playlist-header flex">

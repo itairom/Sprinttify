@@ -12,19 +12,13 @@ export const VolumeBar = () => {
 
     const inputEl = useRef(null)
     useEffect(() => {
-
-        console.log(position);
         if (position.x > 0 && position.x < 100 && position.location === 'volume-progress') {
             onSetVolume()
         }
-
     }, [position])
 
-    // (Time passed in seconds / Song duration in seconds) X 100 = Song progress
 
     const onSetVolume = () => {
-        // console.log(position);
-        // console.log(inputEl.current.attributes[1].nodeValue);
         inputEl.current.attributes[1].nodeValue = position.x
     }
 
@@ -34,7 +28,6 @@ return (
         <div className="volume-container">
             <Volume className="volume-icon" />
         </div>
-        {/* <progress onClick={() => { onSetVolume() }} ref={inputEl} value="35" max="100">  </progress> */}
         <progress className="volume-progress" ref={inputEl} value="35" max="100">  </progress>
     </section>
 )

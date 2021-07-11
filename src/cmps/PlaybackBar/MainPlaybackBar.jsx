@@ -9,10 +9,10 @@ import { VolumeBar } from './VolumeBar'
 export const MainPlaybackBar = () => {
     const { headerInfo, playlistTracks } = useSelector(state => state.playlistModule)
 
-    useEffect(() => {
-        console.log(headerInfo);
+    // useEffect(() => {
+    //     console.log(headerInfo);
 
-    }, [headerInfo])
+    // }, [headerInfo])
 
     return (
         <section className="main-playback">

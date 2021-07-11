@@ -23,7 +23,7 @@ export const useRelativeMousePosition = () => {
   const [position, setPosition] = useState({x:0,y:0})
 
   // const setFromEvent = (ev) => setPosition({ x: ev.target.getBoundingClientRect(), Y: ev.clientY,})
-  const setFromEvent = (ev) => setPosition({x:ev.clientX - ev.target.getBoundingClientRect().left, location:ev.path[0].attributes[0].value})
+  const setFromEvent = (ev) => setPosition({x:ev.clientX - ev.target.getBoundingClientRect().left, location:ev.path[0]?.attributes[0]?.value})
   useEffect(() => {
     window.addEventListener("click", setFromEvent)
     return () => {
