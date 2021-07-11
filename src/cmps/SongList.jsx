@@ -5,13 +5,7 @@ import { SongPreview } from '../cmps/SongPreview'
 
 
 const _SongList = ({ playlistTracks }) => {
-
-    useEffect(()=>{
-        // if(!playlistTracks) return
-        console.log(playlistTracks);
-    })
     
-
     return (
         <div className='song-list'>
             {playlistTracks&&playlistTracks?.map(song =>

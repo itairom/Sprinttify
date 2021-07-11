@@ -3,7 +3,9 @@ const initialState = {
     moodPlaylist: [],
     recentlyPlayedPlaylist: [],
     filterBy: null,
-    playlistTracks: []
+    playlistTracks: [],
+    playlistDuration:null,
+    headerInfo:null
 }
 //SET_MOOD
 //SET_RECENTLY
@@ -17,14 +19,24 @@ export default function PlaylistReducer(state = initialState, action) {
         case 'SET_PLAYLIST_TRACKS':
             return {
                 ...state,
-                playlistTracks: action.tracks.tracks
+                playlistTracks: action.tracks//.tracks
             }
-        default:
+        case 'SET_PLAYLIST_DURATION':
+            return {
+                ...state,
+                playlistDuration: action.tracks//.playlist_duration
+            }
+        case 'SET_PLAYLIST_HEADER':
+            return {
+                ...state,
+                headerInfo: action.headerInfo//.playlist_duration
+            }
         case 'SET_FILTER':
             return {
                 ...state,
                 filterBy: action.filterBy
             }
+        default:
             return state;
     }
 }

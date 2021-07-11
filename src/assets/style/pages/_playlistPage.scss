@@ -1,6 +1,7 @@
 .main-playlist {
     position: relative;
-    z-index: -1;
+    // z-index: -1;
+    z-index: 1;
     background-color: #f1f7f1;
     height: 100%;
     width: 100%;
@@ -10,14 +11,16 @@
     .playlist-head {
         display: flex;
         align-items: center;
-        margin-left: 116px;
+        // margin-left: 116px;
+        margin-left: 100px;
         padding-left: 84px;
         padding-bottom: 10px;
         padding-top: 62px;
         border-bottom: 0.5px solid #646464;
 
         .head-title {
-            flex-basis: 450px;
+            // flex-basis: 450px;          
+            flex-basis: 450px;          
         }
         .head-artist {
             flex-basis: 270px;
