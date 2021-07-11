@@ -1,0 +1,34 @@
+.main-progress-bar {
+    position: fixed;
+
+    bottom: 0;
+    margin-bottom: 18px;
+    margin-left: 438px;
+    left: auto;
+    right: auto;
+    width: 810px;
+    display: flex;
+    align-items: center;
+    p {
+        font-size: 18px;
+        margin-right: 10px;
+        &:last-child {
+            margin-left: 10px;
+            margin-right: 0px;
+        }
+    }
+    progress {
+        -webkit-appearance: none;
+        width: 623px;
+        height: 5px;
+        border-radius: 11px;
+        &::-webkit-progress-bar {
+            background-color: #c4c4c4;
+            border-radius: 11px;
+        }
+        &::-webkit-progress-value {
+            border-radius: 11px;
+            background: #191414;
+        }
+    }
+}

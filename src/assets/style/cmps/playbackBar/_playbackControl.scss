@@ -1,6 +1,5 @@
 .control-container {
     position: fixed;
-
     left: 500;
     bottom: 0;
     margin-bottom: 40px;
@@ -28,8 +27,8 @@
 
     & > * {
         margin-right: 65px;
-        &:last-child{
-            margin-right:0
+        &:last-child {
+            margin-right: 0;
         }
     }
 }
@@ -38,10 +37,6 @@
     :hover {
         stroke: #778c6b;
     }
-
-    // fill: #778c6b;
-    // path {
-    // }
 }
 
 .forward-btn {

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { LeftPlaybackBar } from './LeftPlaybackBar'
 import { PlaybackControl } from './PlaybackControl'
+import { PlaybackProgressBar } from './PlaybackProgressBar'
 
 export const MainPlaybackBar = () => {
     const { headerInfo, playlistTracks } = useSelector(state => state.playlistModule)
@@ -16,6 +17,7 @@ export const MainPlaybackBar = () => {
         <section className="main-playback">
             <LeftPlaybackBar img={headerInfo?.image_url} />
         <PlaybackControl />
+        <PlaybackProgressBar />
         </section>
     )
 }
