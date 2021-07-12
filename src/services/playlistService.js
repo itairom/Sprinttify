@@ -1,8 +1,11 @@
 import { axiosService } from '../services/axiosService'
 
+
+
 export const playlistService = {
     query,
-    getPlaylistTracksById
+    getPlaylistTracksById,
+    getTrackData
 }
 
 async function query() {
@@ -16,9 +19,29 @@ async function query() {
     return playlists
 }
 
-async function getPlaylistTracksById(id ) {
+async function getPlaylistTracksById(id) {
     const tracks = await axiosService.getPlaylistTracks(id)
     return tracks
 }
 
+async function getTrackData(id) {
+    const track = await axiosService.getPlaylingTrack(id)
+    let audio = new Audio(track)
+    audio.crossOrigin='anonymous';
+    // audio.play().then(x=>{
+    //     console.log(x);
+    // })
+    return audio
+}
+
+
+
+
+
+// const getEncryptedToken = (token) => {
+//     let date = new Date();
+//     let utcTime = `${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`
+//     let stringToEncrypt = `${token}===${utcTime}`
+//     return btoa(stringToEncrypt)
+//   }
 

@@ -13,8 +13,8 @@ export const LeftPlaybackBar = ({ img }) => {
         <section className="left-playback">
             <img src={img} alt="album-cover" />
             <div className="song-details">
-                <p>{currentTrack?.name}</p>
-                <p>{currentTrack?.artists_names}</p>
+                <p>{currentTrack?.info?.name}</p>
+                <p>{currentTrack?.info?.artists_names}</p>
             </div>
         </section>
     )

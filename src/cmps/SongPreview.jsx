@@ -1,34 +1,61 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReactComponent as Heart } from '../assets/imgs/heart.svg'
 import { ReactComponent as Play } from '../assets/imgs/play-preview.svg'
 import { ReactComponent as Pause } from '../assets/imgs/pause-preview.svg'
-import { setCurrentTrack,setIsPlaying} from '../actions/PlaylistAction'
+import { setCurrentTrack, setIsPlaying, setCurrentTrackData } from '../actions/PlaylistAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const SongPreview = ({ song }) => {
     const dispatch = useDispatch()
-    const { isPlaying } = useSelector(state => state.playlistModule)
+    const { isPlaying, currentTrack, track } = useSelector(state => state.playlistModule)
+
+    const [localIsPlaying, setLocalIsPlaying] = useState(false)
+
 
     const txtSlice = (txt, length) => {
         return txt.slice(0, length) + '...'
     }
 
-    const onSetCurrTrack = () => {
-        dispatch(setCurrentTrack(song))
-        dispatch(setIsPlaying())
+    useEffect(() => {
+        console.log(isPlaying)
+        if (currentTrack.data) {
+            playPause()
+        }
+        // return()=>{
+        //     setLocalIsPlaying(false)
+        // }
+    }
+        , [isPlaying])
+
+    const playPause = () => {
+        if (isPlaying === true) {
+            console.log('play');
+            currentTrack.data.play()
+        }
+        else {
+            console.log('pause');
+            currentTrack.data.pause()
+        }
     }
 
-    useEffect(()=>{
-        console.log(isPlaying);
-    },[isPlaying])
-    
+    const onSetCurrTrack = async (ev) => {
+        console.log(song);
+        console.log(currentTrack.info);
+        if(song!==currentTrack.info){
+            await dispatch(setCurrentTrack(song))
+            await dispatch(setCurrentTrackData(song.track_id))
+        }
+        await dispatch(setIsPlaying())
+        setLocalIsPlaying(!localIsPlaying)
+    }
+
 
     const { name, artists_names, album_name, release_date } = song
     return (
         <section className="song-card flex">
             <div className="preview-control">
-                {!isPlaying && < Play onClick={() => { onSetCurrTrack() }} className="play-btn" />}
-                {isPlaying && < Pause onClick={() => { onSetCurrTrack() }} className="play-btn" />}
+                {!localIsPlaying && < Play onClick={(ev) => { onSetCurrTrack(ev) }} className="play-btn" />}
+                {localIsPlaying && < Pause onClick={(ev) => { onSetCurrTrack(ev) }} className="play-btn" />}
             </div>
             <div className="heart-container">
                 <Heart className="heart " />

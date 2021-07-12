@@ -1,4 +1,5 @@
 import { axiosService } from "../services/axiosService";
+import { playlistService } from "../services/playlistService";
 
 // Dispatchers
 const _setFeaturedPlaylist = (featuredPlaylist) => ({ type: 'SET_FEATURED', featuredPlaylist });
@@ -8,20 +9,21 @@ const _setPlaylistTracks = (tracks) => ({ type: 'SET_PLAYLIST_TRACKS', tracks })
 const _setPlaylistDuration = (tracks) => ({ type: 'SET_PLAYLIST_DURATION', tracks });
 const _setFilter = (filterBy) => ({ type: 'SET_FILTER', filterBy });
 const _setPlaylistHeadrInfo = (headerInfo) => ({ type: 'SET_PLAYLIST_HEADER', headerInfo });
+const  _setIsPlaying =  () => ({ type: 'SET_IS_PLAYING' });
 const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
-const _setIsPlaying = () => ({ type: 'SET_IS_PLAYING' });
+const _setCurrentTrackData = (trackData) => ({ type: 'SET_CURRENT_TRACK_DATA', trackData });
 
 
 // THUNK
+export  function setIsPlaying() {
+   return async (dispatch) => {
+       dispatch(_setIsPlaying());
+   }
+}
 export function loadFeatured() {
     return async (dispatch) => {
         const featuredPlaylist = await axiosService.getFeaturedPlaylist();
         dispatch(_setFeaturedPlaylist(featuredPlaylist));
-    }
-}
-export function setIsPlaying() {
-    return async (dispatch) => {
-        dispatch(_setIsPlaying());
     }
 }
 export function loadMood() {
@@ -44,6 +46,13 @@ export function setPlaylistHeadrInfo(headerInfo) {
 export function setCurrentTrack(track) {
     return async (dispatch) => {
         dispatch(_setCurrentTrack(track));
+    }
+}
+export function setCurrentTrackData(trackId) {
+    return async (dispatch) => {
+        let trackData = await playlistService.getTrackData(trackId)
+        console.log("🚀 ~ file: PlaylistAction.js ~ line 55 ~ return ~ trackData", trackData)
+        dispatch(_setCurrentTrackData(trackData));
     }
 }
 export function getPlaylistTracks(id, filterBy) {
