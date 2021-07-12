@@ -12,7 +12,8 @@ export const VolumeBar = () => {
 
     const inputEl = useRef(null)
     useEffect(() => {
-        if (position.x > 0 && position.x < 100 && position.location === 'volume-progress') {
+        // if (position.x > 0 && position.x < 100 && position.location === 'volume-progress') {
+        if ( position.location === 'volume-progress') {
             onSetVolume()
         }
     }, [position])

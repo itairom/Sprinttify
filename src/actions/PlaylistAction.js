@@ -9,6 +9,7 @@ const _setPlaylistDuration = (tracks) => ({ type: 'SET_PLAYLIST_DURATION', track
 const _setFilter = (filterBy) => ({ type: 'SET_FILTER', filterBy });
 const _setPlaylistHeadrInfo = (headerInfo) => ({ type: 'SET_PLAYLIST_HEADER', headerInfo });
 const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
+const _setIsPlaying = () => ({ type: 'SET_IS_PLAYING' });
 
 
 // THUNK
@@ -16,6 +17,11 @@ export function loadFeatured() {
     return async (dispatch) => {
         const featuredPlaylist = await axiosService.getFeaturedPlaylist();
         dispatch(_setFeaturedPlaylist(featuredPlaylist));
+    }
+}
+export function setIsPlaying() {
+    return async (dispatch) => {
+        dispatch(_setIsPlaying());
     }
 }
 export function loadMood() {

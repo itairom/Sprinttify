@@ -4,13 +4,19 @@ const initialState = {
     recentlyPlayedPlaylist: [],
     filterBy: null,
     playlistTracks: [],
-    playlistDuration:null,
-    headerInfo:null,
-    currentTrack:null
+    playlistDuration: null,
+    headerInfo: null,
+    currentTrack: null,
+    isPlaying: false
 }
 export default function PlaylistReducer(state = initialState, action) {
     switch (action.type) {
-        case 'SET_FEATURED':
+        case 'SET_IS_PLAYING':
+            return {
+                ...state,
+                isPlaying: !state.isPlaying
+            }
+        case 'SET_PLAYING':
             return {
                 ...state,
                 featuredPlaylist: action.featuredPlaylist.playlists

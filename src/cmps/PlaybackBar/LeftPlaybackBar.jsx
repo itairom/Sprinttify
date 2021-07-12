@@ -7,11 +7,8 @@ export const LeftPlaybackBar = ({ img }) => {
 
     useEffect(() => {
         if (!currentTrack) return
-        console.log(currentTrack);
     }, [currentTrack])
 
-    // if (!currentTrack) return
-    // const { name, album_name, artists_names, duration } = currentTrack
     return (
         <section className="left-playback">
             <img src={img} alt="album-cover" />

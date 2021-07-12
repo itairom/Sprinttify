@@ -7,12 +7,7 @@ export const PlaylistHeader = ({ playlistDuration }) => {
     const inputEl = useRef(null)
 
     useEffect(() => {
-        console.log(headerInfo);
-        // console.log( inputEl.current.style.backgroundImage)
-
-        // console.log( inputEl.current.style.backgroundImage)
         if (headerInfo) {
-            console.log(headerInfo.image_url);
             inputEl.current.style.backgroundImage = `url(${headerInfo?.image_url})`
         }
     }, [headerInfo])
