@@ -1,4 +1,5 @@
 .playlist-header {
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -7,7 +8,7 @@
     height: 220px;
     color: white;
     justify-content: space-between;
-    background-image: url(http://api.sprintt.co/spotify/images/world/w_10.jpg);
+    // background-image: url(http://api.sprintt.co/spotify/images/world/w_10.jpg);
     background-color: rgba(0, 0, 0, 0.474);
     background-blend-mode: darken;
     background-position: center;

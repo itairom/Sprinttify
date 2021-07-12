@@ -1,18 +1,25 @@
-
 import React from 'react'
 import { ReactComponent as Heart } from '../assets/imgs/heart.svg'
 import { ReactComponent as Play } from '../assets/imgs/play-preview.svg'
-export const SongPreview = ({ song }) => {
+import { setCurrentTrack } from '../actions/PlaylistAction'
+import { useDispatch } from 'react-redux'
 
+export const SongPreview = ({ song }) => {
+    const dispatch = useDispatch()
     const txtSlice = (txt, length) => {
         return txt.slice(0, length) + '...'
     }
+
+    const onSetCurrTrack = () => {
+        dispatch(setCurrentTrack(song))
+    }
+
 
     const { name, artists_names, album_name, release_date } = song
     return (
         <section className="song-card flex">
             <div className="preview-control">
-                < Play className="play-btn" />
+                < Play onClick={() => { onSetCurrTrack() }} className="play-btn" />
             </div>
             <div className="heart-container">
                 <Heart className="heart " />

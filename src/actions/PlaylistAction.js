@@ -8,6 +8,8 @@ const _setPlaylistTracks = (tracks) => ({ type: 'SET_PLAYLIST_TRACKS', tracks })
 const _setPlaylistDuration = (tracks) => ({ type: 'SET_PLAYLIST_DURATION', tracks });
 const _setFilter = (filterBy) => ({ type: 'SET_FILTER', filterBy });
 const _setPlaylistHeadrInfo = (headerInfo) => ({ type: 'SET_PLAYLIST_HEADER', headerInfo });
+const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
+
 
 // THUNK
 export function loadFeatured() {
@@ -31,6 +33,11 @@ export function loadRecentlyPlayed() {
 export function setPlaylistHeadrInfo(headerInfo) {
     return async (dispatch) => {
         dispatch(_setPlaylistHeadrInfo(headerInfo));
+    }
+}
+export function setCurrentTrack(track) {
+    return async (dispatch) => {
+        dispatch(_setCurrentTrack(track));
     }
 }
 export function getPlaylistTracks(id, filterBy) {

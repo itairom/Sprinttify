@@ -17,9 +17,9 @@ export const MainPlaybackBar = () => {
     return (
         <section className="main-playback">
             <LeftPlaybackBar img={headerInfo?.image_url} />
-        <PlaybackControl />
-        <PlaybackProgressBar />
-        <VolumeBar />
+            <PlaybackControl />
+            <PlaybackProgressBar />
+            <VolumeBar />
         </section>
     )
 }

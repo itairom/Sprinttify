@@ -1,16 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux';
 
 
 export const PlaylistHeader = ({ playlistDuration }) => {
     const { headerInfo, playlistTracks } = useSelector(state => state.playlistModule)
+    const inputEl = useRef(null)
 
-    // useEffect(() => {
-    //     console.log(headerInfo);
-    // }, [headerInfo])
+    useEffect(() => {
+        console.log(headerInfo);
+        // console.log( inputEl.current.style.backgroundImage)
+
+        // console.log( inputEl.current.style.backgroundImage)
+        if (headerInfo) {
+            console.log(headerInfo.image_url);
+            inputEl.current.style.backgroundImage = `url(${headerInfo?.image_url})`
+        }
+    }, [headerInfo])
 
     return (
-        <nav className="playlist-header flex">
+        <nav ref={inputEl} className="playlist-header">
             <div className="left-header flex">
                 <p className="header-title">{headerInfo?.name}</p>
                 <p className="header-desc">{headerInfo?.description}</p>

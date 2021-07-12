@@ -5,7 +5,8 @@ const initialState = {
     filterBy: null,
     playlistTracks: [],
     playlistDuration:null,
-    headerInfo:null
+    headerInfo:null,
+    currentTrack:null
 }
 export default function PlaylistReducer(state = initialState, action) {
     switch (action.type) {
@@ -13,6 +14,11 @@ export default function PlaylistReducer(state = initialState, action) {
             return {
                 ...state,
                 featuredPlaylist: action.featuredPlaylist.playlists
+            }
+        case 'SET_CURRENT_TRACK':
+            return {
+                ...state,
+                currentTrack: action.track
             }
         case 'SET_PLAYLIST_TRACKS':
             return {
