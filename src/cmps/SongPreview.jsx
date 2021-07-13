@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { ReactComponent as Heart } from '../assets/imgs/heart.svg'
 import { ReactComponent as Play } from '../assets/imgs/play-preview.svg'
 import { ReactComponent as Pause } from '../assets/imgs/pause-preview.svg'
-import { setCurrentTrack, setIsPlaying, setCurrentTrackData } from '../actions/PlaylistAction'
+import { setCurrentTrackInfo, setIsPlaying, setCurrentTrackData } from '../actions/PlaylistAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const SongPreview = ({ song }) => {
     const dispatch = useDispatch()
-    const { isPlaying, currentTrack, track } = useSelector(state => state.playlistModule)
+    const { isPlaying, currentTrack, track ,playlistInfo} = useSelector(state => state.playlistModule)
 
     const [localIsPlaying, setLocalIsPlaying] = useState(false)
 
@@ -21,16 +21,14 @@ export const SongPreview = ({ song }) => {
         if (currentTrack.data) {
             playPause()
         }
-        // return()=>{
-        //     setLocalIsPlaying(false)
-        // }
-    }
-        , [isPlaying])
+    }, [isPlaying])
 
     const playPause = () => {
         if (isPlaying === true) {
-            console.log('play');
-            currentTrack.data.play()
+            if (localIsPlaying===true) {
+                console.log('play');
+                currentTrack.data.play()
+            }
         }
         else {
             console.log('pause');
@@ -39,14 +37,22 @@ export const SongPreview = ({ song }) => {
     }
 
     const onSetCurrTrack = async (ev) => {
-        console.log(song);
-        console.log(currentTrack.info);
-        if(song!==currentTrack.info){
-            await dispatch(setCurrentTrack(song))
-            await dispatch(setCurrentTrackData(song.track_id))
+        console.log(playlistInfo);
+        if(song!==currentTrack.info){ // TODO ADD ELSE
+            if(currentTrack.info){
+                // setLocalIsPlaying(false)
+                currentTrack.data.pause()
+                await dispatch(setIsPlaying())
+            }
+            await dispatch(setCurrentTrackInfo(song))
+            await dispatch(setCurrentTrackData(song.track_id,playlistInfo))
+            setLocalIsPlaying(!localIsPlaying)
+            await dispatch(setIsPlaying())
         }
-        await dispatch(setIsPlaying())
-        setLocalIsPlaying(!localIsPlaying)
+        else{
+            setLocalIsPlaying(!localIsPlaying)
+            await dispatch(setIsPlaying())
+        }
     }
 
 
@@ -55,7 +61,7 @@ export const SongPreview = ({ song }) => {
         <section className="song-card flex">
             <div className="preview-control">
                 {!localIsPlaying && < Play onClick={(ev) => { onSetCurrTrack(ev) }} className="play-btn" />}
-                {localIsPlaying && < Pause onClick={(ev) => { onSetCurrTrack(ev) }} className="play-btn" />}
+                {localIsPlaying  && < Pause onClick={(ev) => { onSetCurrTrack(ev) }} className="play-btn" />}
             </div>
             <div className="heart-container">
                 <Heart className="heart " />

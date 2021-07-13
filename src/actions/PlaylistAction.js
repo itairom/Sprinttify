@@ -8,7 +8,7 @@ const _setRecentlyPlayedPlaylist = (recentlyPlayedPlaylist) => ({ type: 'SET_REC
 const _setPlaylistTracks = (tracks) => ({ type: 'SET_PLAYLIST_TRACKS', tracks });
 const _setPlaylistDuration = (tracks) => ({ type: 'SET_PLAYLIST_DURATION', tracks });
 const _setFilter = (filterBy) => ({ type: 'SET_FILTER', filterBy });
-const _setPlaylistHeadrInfo = (headerInfo) => ({ type: 'SET_PLAYLIST_HEADER', headerInfo });
+const _setPlaylistHeadrInfo = (playlistInfo) => ({ type: 'SET_PLAYLIST_HEADER', playlistInfo });
 const  _setIsPlaying =  () => ({ type: 'SET_IS_PLAYING' });
 const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
 const _setCurrentTrackData = (trackData) => ({ type: 'SET_CURRENT_TRACK_DATA', trackData });
@@ -38,19 +38,21 @@ export function loadRecentlyPlayed() {
         dispatch(_setRecentlyPlayedPlaylist(recentlyPlayedPlaylist));
     }
 }
-export function setPlaylistHeadrInfo(headerInfo) {
+export function setPlaylistHeadrInfo(playlistInfo) {
     return async (dispatch) => {
-        dispatch(_setPlaylistHeadrInfo(headerInfo));
+        dispatch(_setPlaylistHeadrInfo(playlistInfo));
     }
 }
-export function setCurrentTrack(track) {
+export function setCurrentTrackInfo(track) {
     return async (dispatch) => {
         dispatch(_setCurrentTrack(track));
     }
 }
-export function setCurrentTrackData(trackId) {
+export function setCurrentTrackData(trackId,playlistInfo) {
+    console.log("🚀 ~ file: PlaylistAction.js ~ line 52 ~ setCurrentTrackData ~ playlistInfo", playlistInfo)
     return async (dispatch) => {
         let trackData = await playlistService.getTrackData(trackId)
+        await playlistService.notifyPlayedSong(playlistInfo,trackId)
         console.log("🚀 ~ file: PlaylistAction.js ~ line 55 ~ return ~ trackData", trackData)
         dispatch(_setCurrentTrackData(trackData));
     }

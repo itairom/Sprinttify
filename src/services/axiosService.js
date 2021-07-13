@@ -7,7 +7,8 @@ export const axiosService = {
     getMoodPlaylist,
     getRecentlyPlayedPlaylist,
     getPlaylistTracks,
-    getPlaylingTrack
+    getPlaylingTrack,
+    notifyPlayedSong
 }
 
 async function getFeaturedPlaylist() {
@@ -53,22 +54,27 @@ async function getPlaylingTrack(trackId) {
         const encryptedToken = getEncryptedToken(TOKEN)
         const resp = await axios.get(`https://api.sprintt.co/music/play/${trackId}?access=${encryptedToken}`)
         console.log("🚀 ~ file: axiosService.js ~ line 53 ~ getPlaylingSong ~ resp", resp)
-        // return resp.data
         return resp.config.url
-
-        // const blob = new Blob([resp.data], {
-        //     type: 'audio/mp3'
-        // });
-
-        // const url = URL.createObjectURL(blob);
-        // // console.log("🚀 ~ file: axiosService.js ~ line 63 ~ getPlaylingTrack ~ url", url)
-        // return url
+    }
+    catch (err) {
+        throw err
+    }
+}
+async function notifyPlayedSong(playListId, trackId) {
+    try {
+        const encryptedToken = getEncryptedToken(TOKEN)
+        // const rest =
+         axios.post(`https://api.sprintt.co/music/notify_played/${playListId}/${trackId}`,)
+        // console.log("🚀 ~ file: axiosService.js ~ line 53 ~ getPlaylingSong ~ resp", resp)
+        // return resp.config.url
 
     }
     catch (err) {
         throw err
     }
 }
+
+
 
 const getEncryptedToken = (token) => {
     let date = new Date();

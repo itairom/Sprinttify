@@ -5,7 +5,8 @@ import { axiosService } from '../services/axiosService'
 export const playlistService = {
     query,
     getPlaylistTracksById,
-    getTrackData
+    getTrackData,
+    notifyPlayedSong
 }
 
 async function query() {
@@ -28,11 +29,16 @@ async function getTrackData(id) {
     const track = await axiosService.getPlaylingTrack(id)
     let audio = new Audio(track)
     audio.crossOrigin='anonymous';
-    // audio.play().then(x=>{
-    //     console.log(x);
-    // })
     return audio
 }
+
+async function notifyPlayedSong(playlistInfo,trackId) {
+    console.log("🚀 ~ file: playlistService.js ~ line 36 ~ notifyPlayedSong ~ trackId", trackId)
+    console.log("🚀 ~ file: playlistService.js ~ line 36 ~ notifyPlayedSong ~ playlistInfo", playlistInfo)
+    // const track =
+     await axiosService.notifyPlayedSong(playlistInfo.playlist_id,trackId)
+}
+
 
 
 

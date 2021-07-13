@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux'
 export const PlaybackProgressBar = () => {
 
     // useEffect(() => {
-    //     console.log(headerInfo);
+    //     console.log(playlistInfo);
 
-    // }, [headerInfo])
+    // }, [playlistInfo])
 
     // (Time passed in seconds / Song duration in seconds) X 100 = Song progress
 
