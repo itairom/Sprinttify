@@ -28,15 +28,16 @@ async function getPlaylistTracksById(id) {
 async function getTrackData(id) {
     const track = await axiosService.getPlaylingTrack(id)
     let audio = new Audio(track)
-    audio.crossOrigin='anonymous';
-    return audio
+    audio.preload = 'metadata'
+    audio.className = 'current-track'
+    audio.crossOrigin = 'anonymous';
+    const audioObj = { data: audio, url: track }
+    return audioObj
 }
 
-async function notifyPlayedSong(playlistInfo,trackId) {
-    console.log("🚀 ~ file: playlistService.js ~ line 36 ~ notifyPlayedSong ~ trackId", trackId)
-    console.log("🚀 ~ file: playlistService.js ~ line 36 ~ notifyPlayedSong ~ playlistInfo", playlistInfo)
+async function notifyPlayedSong(playlistInfo, trackId) {
     // const track =
-     await axiosService.notifyPlayedSong(playlistInfo.playlist_id,trackId)
+    await axiosService.notifyPlayedSong(playlistInfo.playlist_id, trackId)
 }
 
 

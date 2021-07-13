@@ -9,16 +9,15 @@ const _setPlaylistTracks = (tracks) => ({ type: 'SET_PLAYLIST_TRACKS', tracks })
 const _setPlaylistDuration = (tracks) => ({ type: 'SET_PLAYLIST_DURATION', tracks });
 const _setFilter = (filterBy) => ({ type: 'SET_FILTER', filterBy });
 const _setPlaylistHeadrInfo = (playlistInfo) => ({ type: 'SET_PLAYLIST_HEADER', playlistInfo });
-const  _setIsPlaying =  () => ({ type: 'SET_IS_PLAYING' });
+const _setIsPlaying = () => ({ type: 'SET_IS_PLAYING' });
 const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
 const _setCurrentTrackData = (trackData) => ({ type: 'SET_CURRENT_TRACK_DATA', trackData });
 
-
 // THUNK
-export  function setIsPlaying() {
-   return async (dispatch) => {
-       dispatch(_setIsPlaying());
-   }
+export function setIsPlaying() {
+    return async (dispatch) => {
+        dispatch(_setIsPlaying());
+    }
 }
 export function loadFeatured() {
     return async (dispatch) => {
@@ -48,12 +47,11 @@ export function setCurrentTrackInfo(track) {
         dispatch(_setCurrentTrack(track));
     }
 }
-export function setCurrentTrackData(trackId,playlistInfo) {
+export function setCurrentTrackData(trackId, playlistInfo) {
     console.log("🚀 ~ file: PlaylistAction.js ~ line 52 ~ setCurrentTrackData ~ playlistInfo", playlistInfo)
     return async (dispatch) => {
         let trackData = await playlistService.getTrackData(trackId)
-        await playlistService.notifyPlayedSong(playlistInfo,trackId)
-        console.log("🚀 ~ file: PlaylistAction.js ~ line 55 ~ return ~ trackData", trackData)
+        // await playlistService.notifyPlayedSong(playlistInfo,trackId) // NOTIFY 
         dispatch(_setCurrentTrackData(trackData));
     }
 }
@@ -66,7 +64,6 @@ export function getPlaylistTracks(id, filterBy) {
             localFilterd = tracks.tracks.filter((track) => regex.test(track.name));
             dispatch(_setPlaylistTracks(localFilterd));
             dispatch(_setPlaylistDuration(tracks.playlist_duration));
-
         }
         dispatch(_setPlaylistTracks(localFilterd));
         dispatch(_setPlaylistDuration(tracks.playlist_duration));
