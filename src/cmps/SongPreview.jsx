@@ -16,36 +16,45 @@ export const SongPreview = ({ song }) => {
 
     useEffect(() => {
         if (currentTrack.data) {
-            playPause()
+            if (isPlaying) {
+                // console.log('play');
+                currentTrack.data.play()
+            }
+            else {
+                // console.log('pause');
+                currentTrack.data.pause()
+            }
         }
     }, [isPlaying])
 
-    const playPause = () => {
-        if (isPlaying === true) {
-            if (localIsPlaying === true) {
-                currentTrack.data.play()
-            }
-        }
-        else {
-            currentTrack.data.pause()
-        }
-    }
+    const onSetCurrTrack = async (playStatus) => {
 
-    const onSetCurrTrack = async (ev) => {
-        if (song !== currentTrack.info) { 
-            if (currentTrack.info) { // load new song
-                // currentTrack.data.pause()
-                currentTrack.data = null
-                await dispatch(setIsPlaying())
-            }
+        if (!currentTrack.info) { // Load first song
             await dispatch(setCurrentTrackInfo(song))
             await dispatch(setCurrentTrackData(song.track_id, playlistInfo))
-            setLocalIsPlaying(!localIsPlaying)
-            await dispatch(setIsPlaying())
+            setLocalIsPlaying(true)
+            await dispatch(setIsPlaying(true))
         }
-        else {
-            setLocalIsPlaying(!localIsPlaying)
-            await dispatch(setIsPlaying())
+
+        else if (song !== currentTrack.info) { // Load osher song
+            setLocalIsPlaying(true) //check
+            await dispatch(setIsPlaying(false))
+            await dispatch(setCurrentTrackInfo(song))
+            await dispatch(setCurrentTrackData(song.track_id, playlistInfo))
+            await dispatch(setIsPlaying(true))
+            setLocalIsPlaying(true)
+        }
+
+        else { // Pause / Play
+            if (playStatus) {
+                setLocalIsPlaying(true)
+                await dispatch(setIsPlaying(true))
+            }
+            else {
+                setLocalIsPlaying(false)
+                await dispatch(setIsPlaying(false))
+
+            }
         }
     }
 
@@ -53,8 +62,8 @@ export const SongPreview = ({ song }) => {
     return (
         <section className="song-card flex">
             <div className="preview-control">
-                {!localIsPlaying && < Play onClick={(ev) => { onSetCurrTrack(ev) }} className="play-btn" />}
-                {localIsPlaying && < Pause onClick={(ev) => { onSetCurrTrack(ev) }} className="play-btn" />}
+                {!localIsPlaying && < Play onClick={() => { onSetCurrTrack(true) }} className="play-btn" />}
+                {localIsPlaying && < Pause onClick={() => { onSetCurrTrack(false) }} className="play-btn" />}
             </div>
             <div className="heart-container">
                 <Heart className="heart " />

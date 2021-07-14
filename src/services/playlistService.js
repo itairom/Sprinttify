@@ -6,7 +6,9 @@ export const playlistService = {
     query,
     getPlaylistTracksById,
     getTrackData,
-    notifyPlayedSong
+    notifyPlayedSong,
+    playNextTrack,
+    playPreviousTrack
 }
 
 async function query() {
@@ -40,6 +42,31 @@ async function notifyPlayedSong(playlistInfo, trackId) {
     await axiosService.notifyPlayedSong(playlistInfo.playlist_id, trackId)
 }
 
+function playNextTrack(playlist, trackId) {
+    if (!trackId) return
+    let nextTrack = null
+    playlist.forEach((track, idx) => {
+        if (track.track_id === trackId) {
+            nextTrack = (playlist[idx + 1]);
+            // if (typeof nextTrack === undefined) return
+        }
+    })
+    if (!nextTrack) return
+    return nextTrack
+}
+
+function playPreviousTrack(playlist, trackId) {
+    if (!trackId) return
+    let previousTrack = null
+    playlist.forEach((track, idx) => {
+        if (track.track_id === trackId) {
+            previousTrack = (playlist[idx - 1]);
+            // if (typeof previousTrack === undefined) return
+        }
+    })
+    if (!previousTrack) return
+    return previousTrack
+}
 
 
 

@@ -9,7 +9,7 @@ const initialState = {
     currentTrack: { info: null, data: null },
     isPlaying: false,
     // track: new Audio("https://api.sprintt.co/music/play/1371?access=MWU2YmU3ODItMDYwMC00YjMyLTk2NzQtNWE0NDg4YWU2Y2Q0PT09MTI6NTY6MzA=")
-
+    
 }
 export default function PlaylistReducer(state = initialState, action) {
     switch (action.type) {
@@ -17,7 +17,7 @@ export default function PlaylistReducer(state = initialState, action) {
         case 'SET_IS_PLAYING':
             return {
                 ...state,
-                isPlaying: !state.isPlaying
+                isPlaying: action.isPlaying
             }
         case 'SET_PLAYING':
             return {
@@ -32,6 +32,16 @@ export default function PlaylistReducer(state = initialState, action) {
             return {
                 ...state, currentTrack: { ...state.currentTrack, data: action.trackData.data, url: action.trackData.url }
             }
+        case 'SKIP_TEN':
+            return {
+                //Data is state.currentTrack.data.currentTime 
+                ...state, currentTrack: {
+                    ...state.currentTrack, data: {
+                        ...state.currentTrack.data, currentTime: 0.7
+                    }
+                }
+            }
+
         case 'SET_PLAYLIST_TRACKS':
             return {
                 ...state,

@@ -53,7 +53,6 @@ async function getPlaylingTrack(trackId) {
     try {
         const encryptedToken = getEncryptedToken(TOKEN)
         const resp = await axios.get(`https://api.sprintt.co/music/play/${trackId}?access=${encryptedToken}`)
-        console.log("🚀 ~ file: axiosService.js ~ line 53 ~ getPlaylingSong ~ resp", resp)
         return resp.config.url
     }
     catch (err) {
@@ -63,11 +62,6 @@ async function getPlaylingTrack(trackId) {
 async function notifyPlayedSong(playListId, trackId) {
     try {
         const encryptedToken = getEncryptedToken(TOKEN)
-        // const rest =
-         axios.post(`https://api.sprintt.co/music/notify_played/${playListId}/${trackId}`,)
-        // console.log("🚀 ~ file: axiosService.js ~ line 53 ~ getPlaylingSong ~ resp", resp)
-        // return resp.config.url
-
     }
     catch (err) {
         throw err
