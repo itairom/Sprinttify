@@ -1,4 +1,5 @@
 import { axiosService } from "../services/axiosService";
+import { playlistService } from "../services/playlistService";
 
 // Dispatchers
 const _setFeaturedPlaylist = (featuredPlaylist) => ({ type: 'SET_FEATURED', featuredPlaylist });
@@ -7,9 +8,18 @@ const _setRecentlyPlayedPlaylist = (recentlyPlayedPlaylist) => ({ type: 'SET_REC
 const _setPlaylistTracks = (tracks) => ({ type: 'SET_PLAYLIST_TRACKS', tracks });
 const _setPlaylistDuration = (tracks) => ({ type: 'SET_PLAYLIST_DURATION', tracks });
 const _setFilter = (filterBy) => ({ type: 'SET_FILTER', filterBy });
-const _setPlaylistHeadrInfo = (headerInfo) => ({ type: 'SET_PLAYLIST_HEADER', headerInfo });
+const _setPlaylistHeadrInfo = (playlistInfo) => ({ type: 'SET_PLAYLIST_HEADER', playlistInfo });
+const _setIsPlaying = (isPlaying) => ({ type: 'SET_IS_PLAYING',isPlaying });
+const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
+const _setCurrentTrackData = (trackData) => ({ type: 'SET_CURRENT_TRACK_DATA', trackData });
+const _skipTen = () => ({ type: 'SKIP_TEN' });
 
 // THUNK
+export function setIsPlaying(isPlaying) {
+    return async (dispatch) => {
+        dispatch(_setIsPlaying(isPlaying));
+    }
+}
 export function loadFeatured() {
     return async (dispatch) => {
         const featuredPlaylist = await axiosService.getFeaturedPlaylist();
@@ -28,9 +38,21 @@ export function loadRecentlyPlayed() {
         dispatch(_setRecentlyPlayedPlaylist(recentlyPlayedPlaylist));
     }
 }
-export function setPlaylistHeadrInfo(headerInfo) {
+export function setPlaylistHeadrInfo(playlistInfo) {
     return async (dispatch) => {
-        dispatch(_setPlaylistHeadrInfo(headerInfo));
+        dispatch(_setPlaylistHeadrInfo(playlistInfo));
+    }
+}
+export function setCurrentTrackInfo(track) {
+    return async (dispatch) => {
+        dispatch(_setCurrentTrack(track));
+    }
+}
+export function setCurrentTrackData(trackId, playlistInfo) {
+    return async (dispatch) => {
+        let trackData = await playlistService.getTrackData(trackId)
+        // await playlistService.notifyPlayedSong(playlistInfo,trackId) // NOTIFY 
+        dispatch(_setCurrentTrackData(trackData));
     }
 }
 export function getPlaylistTracks(id, filterBy) {
@@ -42,7 +64,6 @@ export function getPlaylistTracks(id, filterBy) {
             localFilterd = tracks.tracks.filter((track) => regex.test(track.name));
             dispatch(_setPlaylistTracks(localFilterd));
             dispatch(_setPlaylistDuration(tracks.playlist_duration));
-
         }
         dispatch(_setPlaylistTracks(localFilterd));
         dispatch(_setPlaylistDuration(tracks.playlist_duration));
@@ -50,4 +71,7 @@ export function getPlaylistTracks(id, filterBy) {
 }
 export function setFilter(filterBy) {
     return (dispatch) => dispatch(_setFilter(filterBy))
+}
+export function skipTen() {
+    return (dispatch) => dispatch(_skipTen())
 }

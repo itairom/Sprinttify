@@ -7,35 +7,36 @@ export const VolumeBar = () => {
 
 
     const position = useRelativeMousePosition()
+    const { currentTrack, isPlaying } = useSelector(state => state.playlistModule)
 
 
 
     const inputEl = useRef(null)
     useEffect(() => {
-
-        console.log(position);
-        if (position.x > 0 && position.x < 100 && position.location === 'volume-progress') {
+        // if (position.x > 0 && position.x < 100 && position.location === 'volume-progress') {
+        if (position.location === 'volume-progress') {
             onSetVolume()
         }
-
     }, [position])
 
-    // (Time passed in seconds / Song duration in seconds) X 100 = Song progress
 
     const onSetVolume = () => {
-        // console.log(position);
-        // console.log(inputEl.current.attributes[1].nodeValue);
         inputEl.current.attributes[1].nodeValue = position.x
+        if (currentTrack?.data?.volume) {
+            let volume = ( position.x/100)
+            console.log(volume);
+            currentTrack.data.volume = volume
+        }
+
     }
 
 
-return (
-    <section className="volume-bar">
-        <div className="volume-container">
-            <Volume className="volume-icon" />
-        </div>
-        {/* <progress onClick={() => { onSetVolume() }} ref={inputEl} value="35" max="100">  </progress> */}
-        <progress className="volume-progress" ref={inputEl} value="35" max="100">  </progress>
-    </section>
-)
+    return (
+        <section className="volume-bar">
+            <div className="volume-container">
+                <Volume className="volume-icon" />
+            </div>
+            <progress className="volume-progress" ref={inputEl} value="10" max="100">  </progress>
+        </section>
+    )
 }

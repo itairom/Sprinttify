@@ -7,7 +7,11 @@
     width: 810px;
     display: flex;
     align-items: center;
+    
     p {
+        // position: fixed;
+        min-width: 50px;
+        margin-left: 30px;
         font-size: 18px;
         margin-right: 10px;
         &:last-child {
@@ -15,7 +19,9 @@
             margin-right: 0px;
         }
     }
+    
     progress {
+        // position: fixed;
         -webkit-appearance: none;
         width: 623px;
         height: 5px;
@@ -27,6 +33,8 @@
         &::-webkit-progress-value {
             border-radius: 11px;
             background: #191414;
+            transition: background 3s ease-in;
+
         }
     }
 }

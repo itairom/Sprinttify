@@ -7,19 +7,19 @@ import { PlaybackProgressBar } from './PlaybackProgressBar'
 import { VolumeBar } from './VolumeBar'
 
 export const MainPlaybackBar = () => {
-    const { headerInfo, playlistTracks } = useSelector(state => state.playlistModule)
+    const { playlistInfo, playlistTracks } = useSelector(state => state.playlistModule)
 
-    useEffect(() => {
-        console.log(headerInfo);
+    // useEffect(() => {
+    //     console.log(playlistInfo);
 
-    }, [headerInfo])
+    // }, [playlistInfo])
 
     return (
         <section className="main-playback">
-            <LeftPlaybackBar img={headerInfo?.image_url} />
-        <PlaybackControl />
-        <PlaybackProgressBar />
-        <VolumeBar />
+            <LeftPlaybackBar img={playlistInfo?.image_url} />
+            <PlaybackControl />
+            <PlaybackProgressBar />
+            <VolumeBar />
         </section>
     )
 }
