@@ -95,7 +95,7 @@ export const PlaybackProgressBar = () => {
 
     return (
         <section className="main-progress-bar">
-            <button onClick={() => { skip() }}>Skip</button>
+            {/* <button onClick={() => { skip() }}>Skip</button> */}
             {/* <p>{timeFormat(passedTime)}</p> */}
             <progress ref={elRef} value="0" max="100">  </progress>
             {/* <p className="total-time" >{timeFormat(duration)}</p> */}

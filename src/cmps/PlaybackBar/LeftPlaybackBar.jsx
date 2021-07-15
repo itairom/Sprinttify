@@ -7,7 +7,6 @@ export const LeftPlaybackBar = ({ img }) => {
     
     useEffect(() => {
         if (!currentTrack) return
-        console.log(currentTrack.info);
     }, [currentTrack.info]) // ?
 
     return (

@@ -29,7 +29,7 @@ export const SongPreview = ({ song }) => {
     useEffect(() => {
         if (currentTrack.data) {
             if (isPlaying) {
-                // console.log('play');
+                console.log('play');
                 currentTrack.data.play()
             }
             else {
