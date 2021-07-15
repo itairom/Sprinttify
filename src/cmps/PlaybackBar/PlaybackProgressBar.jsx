@@ -26,16 +26,18 @@ export const PlaybackProgressBar = () => {
         }
     }, [isPlaying])
 
-    useEffect(() => {
-        console.log('change song');
-        elRef.current.value = 0
-        return () => {
-            if (currentTrack.data) {
-                        currentTrack.data.pause()
-                        clearInterval(interval)
-                    }
-            }
-        }, [currentTrack.info])
+//CHRECK
+
+    // useEffect(() => { 
+    //     console.log('change song');
+    //     elRef.current.value = 0
+    //     return () => {
+    //         if (currentTrack.data) {
+    //                     currentTrack.data.pause()
+    //                     clearInterval(interval)
+    //                 }
+    //         }
+    //     }, [currentTrack.info])
         
         
         useEffect(() => {

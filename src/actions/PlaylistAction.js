@@ -62,7 +62,7 @@ export function setCurrentTrackData(trackId, playlistInfo) {
         dispatch(_setCurrentTrackData(trackData));
     }
 }
-export function getPlaylistTracks(id, filterBy) {
+export function getPlaylistTracks(id, filterBy='') {
     return async (dispatch) => {
         const tracks = await axiosService.getPlaylistTracks(id);
         let localFilterd = tracks.tracks

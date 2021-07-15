@@ -7,7 +7,6 @@ import { PlaylistHeader } from '../cmps/PlaylistHeader'
 export const LikedSongs = () => {
     const dispatch = useDispatch()
     const { likedSongsPlaylist } = useSelector(state => state.playlistModule)
-
     const [likedPlaylistObj, setLikedPlaylistObj] = useState({})
 
     useState(() => {
@@ -21,7 +20,6 @@ export const LikedSongs = () => {
     }, [])
 
     useEffect(() => {
-        console.log(likedSongsPlaylist);
     }, [likedSongsPlaylist])
 
     if (!likedSongsPlaylist) return

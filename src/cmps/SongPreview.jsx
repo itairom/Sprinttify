@@ -9,7 +9,7 @@ import { playlistService } from '../services/playlistService'
 
 export const SongPreview = ({ song }) => {
     const dispatch = useDispatch()
-    const { isPlaying, currentTrack, track, playlistInfo } = useSelector(state => state.playlistModule)
+    const { isPlaying, currentTrack, playlistInfo } = useSelector(state => state.playlistModule)
     const [localIsPlaying, setLocalIsPlaying] = useState(false)
     const [isLiking, setIsLiking] = useState(null)
 
@@ -40,7 +40,6 @@ export const SongPreview = ({ song }) => {
     }, [isPlaying])
 
     const onSetCurrTrack = async (playStatus) => {
-
         if (!currentTrack.info) { // Load first song
             await dispatch(setCurrentTrackInfo(song))
             await dispatch(setCurrentTrackData(song.track_id, playlistInfo))

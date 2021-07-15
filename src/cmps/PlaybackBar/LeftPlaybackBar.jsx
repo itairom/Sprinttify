@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux'
 
 export const LeftPlaybackBar = ({ img }) => {
     const { currentTrack } = useSelector(state => state.playlistModule)
-    // const { is_liked } = currentTrack.info
+    
     useEffect(() => {
         if (!currentTrack) return
         console.log(currentTrack.info);
-    }, [currentTrack])
+    }, [currentTrack.info]) // ?
 
     return (
         <section className="left-playback">

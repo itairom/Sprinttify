@@ -1,8 +1,9 @@
+
+
 import { useEffect, useState } from 'react'
 
 export const useForm = (initialState, cb = () => { }) => {
   const [fields, setFields] = useState(initialState)
-
   useEffect(() => {
     cb(fields)
   }, [fields])

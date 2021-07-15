@@ -6,7 +6,7 @@ import { useRelativeMousePosition } from '../../services/customHooks'
 export const VolumeBar = () => {
     
     const position = useRelativeMousePosition()
-    const { currentTrack, isPlaying } = useSelector(state => state.playlistModule)
+    const { currentTrack } = useSelector(state => state.playlistModule)
     const inputEl = useRef(null)
     
     useEffect(() => {

@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const TOKEN = '1e6be782-0600-4b32-9674-5a4488ae6cd4';
-// const encryptedToken = getEncryptedToken(TOKEN)
 
 
 export const axiosService = {

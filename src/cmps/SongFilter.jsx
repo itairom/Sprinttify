@@ -1,5 +1,5 @@
 import { ReactComponent as Glass } from '../assets/imgs/magnify.svg'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useForm } from '../services/customHooks'
 
 export const SongFilter = ({ onSetFilter }) => {

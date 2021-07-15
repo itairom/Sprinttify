@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux';
-import LikedBackground from '../assets/imgs/liked_songs.jpg'
 
 export const PlaylistHeader = ({ playlistDuration, likedPlaylist }) => {
     const { playlistInfo, playlistTracks } = useSelector(state => state.playlistModule)
@@ -8,10 +7,8 @@ export const PlaylistHeader = ({ playlistDuration, likedPlaylist }) => {
 
     
     useEffect(() => {
-        console.log(likedPlaylist);
         if (playlistInfo) {
             inputEl.current.style.backgroundImage = `url(${playlistInfo?.image_url})`
-            
         }
     }, [playlistInfo])
     
