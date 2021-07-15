@@ -72,14 +72,13 @@ export const PlaybackProgressBar = () => {
         await dispatch(setIsPlaying())
     }
 
-
-
-
     const skip = async () => {
-        console.log(currentTrack.data.currentTime);
-        currentTrack.data.pause()
-        await dispatch(skipTen())
-        console.log(currentTrack.data.currentTime);
+        if(currentTrack?.data?.currentTime){
+            console.log(currentTrack.data.currentTime);
+            currentTrack.data.currentTime=30.323232 
+            console.log(currentTrack.data.currentTime);
+        }
+        // await dispatch(skipTen())
 
     }
 
@@ -94,7 +93,7 @@ export const PlaybackProgressBar = () => {
 
     return (
         <section className="main-progress-bar">
-            {/* <button onClick={() => { skip() }}>Skip</button> */}
+            <button onClick={() => { skip() }}>Skip</button>
             {/* <p>{timeFormat(passedTime)}</p> */}
             <progress ref={elRef} value="0" max="100">  </progress>
             {/* <p className="total-time" >{timeFormat(duration)}</p> */}

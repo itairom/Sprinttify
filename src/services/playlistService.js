@@ -8,7 +8,8 @@ export const playlistService = {
     getTrackData,
     notifyPlayedSong,
     playNextTrack,
-    playPreviousTrack
+    playPreviousTrack,
+    setTrackLike
 }
 
 async function query() {
@@ -61,14 +62,16 @@ function playPreviousTrack(playlist, trackId) {
     playlist.forEach((track, idx) => {
         if (track.track_id === trackId) {
             previousTrack = (playlist[idx - 1]);
-            // if (typeof previousTrack === undefined) return
         }
     })
     if (!previousTrack) return
     return previousTrack
 }
 
-
+async function setTrackLike(trackId, LiksStatus) {
+    const ans = await axiosService.setTrackLike(trackId, LiksStatus)
+    return ans
+}
 
 
 

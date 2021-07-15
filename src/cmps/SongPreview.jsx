@@ -1,18 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ReactComponent as Heart } from '../assets/imgs/heart.svg'
+import { ReactComponent as FilledHeart } from '../assets/imgs/filled-heart.svg'
 import { ReactComponent as Play } from '../assets/imgs/play-preview.svg'
 import { ReactComponent as Pause } from '../assets/imgs/pause-preview.svg'
 import { setCurrentTrackInfo, setIsPlaying, setCurrentTrackData, setCurrentTrackDuration } from '../actions/PlaylistAction'
 import { useDispatch, useSelector } from 'react-redux'
+import { playlistService } from '../services/playlistService'
 
 export const SongPreview = ({ song }) => {
     const dispatch = useDispatch()
     const { isPlaying, currentTrack, track, playlistInfo } = useSelector(state => state.playlistModule)
     const [localIsPlaying, setLocalIsPlaying] = useState(false)
+    const [isLiking, setIsLiking] = useState(null)
+
+    const { name, artists_names, album_name, release_date, is_liked, track_id } = song
 
     const txtSlice = (txt, length) => {
         return txt.slice(0, length) + '...'
     }
+
+    useEffect(() => {
+        const status = (is_liked === 1) ? true : false
+
+        setIsLiking(status)
+    }, [])
+
 
     useEffect(() => {
         if (currentTrack.data) {
@@ -58,7 +70,14 @@ export const SongPreview = ({ song }) => {
         }
     }
 
-    const { name, artists_names, album_name, release_date } = song
+
+    const onSetLike = (status) => {
+        playlistService.setTrackLike(track_id, status)
+        const statusBool = (status === 1) ? true : false
+
+        setIsLiking(statusBool)
+    }
+
     return (
         <section className="song-card flex">
             <div className="preview-control">
@@ -66,7 +85,10 @@ export const SongPreview = ({ song }) => {
                 {localIsPlaying && < Pause onClick={() => { onSetCurrTrack(false) }} className="play-btn" />}
             </div>
             <div className="heart-container">
-                <Heart className="heart " />
+                {(isLiking === false) && <Heart onClick={() => { onSetLike(1) }} className="heart " />}
+                {(isLiking === true) && <FilledHeart onClick={() => { onSetLike(0) }} className="heart " />}
+                {/* {(is_liked===0 ) && <Heart onClick={() => { onSetLike(1) }} className="heart " />}
+                {(is_liked ===1) && <FilledHeart onClick={() => { onSetLike(0) }} className="heart " />} */}
             </div>
             <p className="song-title cell">{name.length > 30 ? txtSlice(name, 30) : name}</p>
             <p className="song-artist cell" >

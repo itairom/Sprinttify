@@ -1,6 +1,8 @@
 import axios from 'axios'
 
 const TOKEN = '1e6be782-0600-4b32-9674-5a4488ae6cd4';
+// const encryptedToken = getEncryptedToken(TOKEN)
+
 
 export const axiosService = {
     getFeaturedPlaylist,
@@ -8,7 +10,8 @@ export const axiosService = {
     getRecentlyPlayedPlaylist,
     getPlaylistTracks,
     getPlaylingTrack,
-    notifyPlayedSong
+    notifyPlayedSong,
+    setTrackLike
 }
 
 async function getFeaturedPlaylist() {
@@ -59,6 +62,20 @@ async function getPlaylingTrack(trackId) {
         throw err
     }
 }
+
+async function setTrackLike(trackId, LiksStatus) {
+    const status = (LiksStatus === 1) ? true : false
+    try {
+       const resp= await axios.post(`https://api.sprintt.co/music/liked_tracks/${trackId}?status=${status}`,null, options)
+       return resp
+    }
+    catch (err) {
+        throw err
+    }
+}
+
+
+
 async function notifyPlayedSong(playListId, trackId) {
     try {
         const encryptedToken = getEncryptedToken(TOKEN)
@@ -68,15 +85,12 @@ async function notifyPlayedSong(playListId, trackId) {
     }
 }
 
-
-
 const getEncryptedToken = (token) => {
     let date = new Date();
     let utcTime = `${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`
     let stringToEncrypt = `${token}===${utcTime}`
     return btoa(stringToEncrypt)
 }
-
 
 const options = {
     headers: { 'user-access-token': `${TOKEN}` }
