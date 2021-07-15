@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReactComponent as Heart } from '../assets/imgs/heart.svg'
 import { ReactComponent as FilledHeart } from '../assets/imgs/filled-heart.svg'
 import { ReactComponent as Play } from '../assets/imgs/play-preview.svg'
 import { ReactComponent as Pause } from '../assets/imgs/pause-preview.svg'
-import { setCurrentTrackInfo, setIsPlaying, setCurrentTrackData, setCurrentTrackDuration } from '../actions/PlaylistAction'
+import { setCurrentTrackInfo, setIsPlaying, setCurrentTrackData } from '../actions/PlaylistAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { playlistService } from '../services/playlistService'
 

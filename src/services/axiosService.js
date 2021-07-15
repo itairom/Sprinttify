@@ -11,7 +11,8 @@ export const axiosService = {
     getPlaylistTracks,
     getPlaylingTrack,
     notifyPlayedSong,
-    setTrackLike
+    setTrackLike,
+    getLikedSongsPlaylist
 }
 
 async function getFeaturedPlaylist() {
@@ -52,6 +53,16 @@ async function getPlaylistTracks(id) {
     }
 }
 
+async function getLikedSongsPlaylist() {
+    try {
+        const resp = await axios.get(`https://api.sprintt.co/music/liked_tracks?limit=100`, options)
+        return resp.data
+    }
+    catch (err) {
+        throw err
+    }
+}
+
 async function getPlaylingTrack(trackId) {
     try {
         const encryptedToken = getEncryptedToken(TOKEN)
@@ -66,15 +77,12 @@ async function getPlaylingTrack(trackId) {
 async function setTrackLike(trackId, LiksStatus) {
     const status = (LiksStatus === 1) ? true : false
     try {
-       const resp= await axios.post(`https://api.sprintt.co/music/liked_tracks/${trackId}?status=${status}`,null, options)
-       return resp
+       await axios.post(`https://api.sprintt.co/music/liked_tracks/${trackId}?status=${status}`,null, options)
     }
     catch (err) {
         throw err
     }
 }
-
-
 
 async function notifyPlayedSong(playListId, trackId) {
     try {
@@ -84,6 +92,8 @@ async function notifyPlayedSong(playListId, trackId) {
         throw err
     }
 }
+
+
 
 const getEncryptedToken = (token) => {
     let date = new Date();

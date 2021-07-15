@@ -11,6 +11,7 @@ export const PlayListPage = ({ match }) => {
     const { playlistTracks, playlistDuration, filterBy } = useSelector(state => state.playlistModule)
     const { id } = match.params
 
+   
     useEffect(() => {
         const loadPlaylist = async () => {
             dispatch(getPlaylistTracks(id, filterBy))
@@ -21,7 +22,6 @@ export const PlayListPage = ({ match }) => {
 
     return (
         <section className="main-container main-playlist">
-
             <SongFilter onSetFilter={(filterBy) => dispatch(setFilter(filterBy))} />
             <div className="playlist-head">
                 <p className="head-title" >TITLE</p>

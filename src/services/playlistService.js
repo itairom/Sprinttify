@@ -9,7 +9,8 @@ export const playlistService = {
     notifyPlayedSong,
     playNextTrack,
     playPreviousTrack,
-    setTrackLike
+    setTrackLike,
+    getLikedSongsPlaylist
 }
 
 async function query() {
@@ -39,7 +40,6 @@ async function getTrackData(id) {
 }
 
 async function notifyPlayedSong(playlistInfo, trackId) {
-    // const track =
     await axiosService.notifyPlayedSong(playlistInfo.playlist_id, trackId)
 }
 
@@ -49,7 +49,6 @@ function playNextTrack(playlist, trackId) {
     playlist.forEach((track, idx) => {
         if (track.track_id === trackId) {
             nextTrack = (playlist[idx + 1]);
-            // if (typeof nextTrack === undefined) return
         }
     })
     if (!nextTrack) return
@@ -69,8 +68,13 @@ function playPreviousTrack(playlist, trackId) {
 }
 
 async function setTrackLike(trackId, LiksStatus) {
-    const ans = await axiosService.setTrackLike(trackId, LiksStatus)
-    return ans
+    await axiosService.setTrackLike(trackId, LiksStatus)
+
+}
+
+async function getLikedSongsPlaylist() {
+    const likedPlaylist = await axiosService.getLikedSongsPlaylist()
+    return likedPlaylist
 }
 
 

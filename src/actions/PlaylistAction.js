@@ -9,10 +9,11 @@ const _setPlaylistTracks = (tracks) => ({ type: 'SET_PLAYLIST_TRACKS', tracks })
 const _setPlaylistDuration = (tracks) => ({ type: 'SET_PLAYLIST_DURATION', tracks });
 const _setFilter = (filterBy) => ({ type: 'SET_FILTER', filterBy });
 const _setPlaylistHeadrInfo = (playlistInfo) => ({ type: 'SET_PLAYLIST_HEADER', playlistInfo });
-const _setIsPlaying = (isPlaying) => ({ type: 'SET_IS_PLAYING',isPlaying });
+const _setIsPlaying = (isPlaying) => ({ type: 'SET_IS_PLAYING', isPlaying });
 const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
 const _setCurrentTrackData = (trackData) => ({ type: 'SET_CURRENT_TRACK_DATA', trackData });
 const _skipTen = () => ({ type: 'SKIP_TEN' });
+const _setLikedPlaylist = (likedSongsPlaylist) => ({ type: 'SET_LIKED_SONGS', likedSongsPlaylist })
 
 // THUNK
 export function setIsPlaying(isPlaying) {
@@ -41,6 +42,12 @@ export function loadRecentlyPlayed() {
 export function setPlaylistHeadrInfo(playlistInfo) {
     return async (dispatch) => {
         dispatch(_setPlaylistHeadrInfo(playlistInfo));
+    }
+}
+export function setLikedPlaylist() {
+    return async (dispatch) => {
+        const likedSongsPlaylist = await playlistService.getLikedSongsPlaylist()
+        dispatch(_setLikedPlaylist(likedSongsPlaylist));
     }
 }
 export function setCurrentTrackInfo(track) {
