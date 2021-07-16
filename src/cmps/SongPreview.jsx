@@ -18,6 +18,31 @@ export const SongPreview = ({ song }) => {
     const txtSlice = (txt, length) => {
         return txt.slice(0, length) + '...'
     }
+    const loadOtherSong = async () => {
+        setLocalIsPlaying(true) //check
+        await dispatch(setIsPlaying(false))
+        await dispatch(setCurrentTrackInfo(song))
+        await dispatch(setCurrentTrackData(song.track_id, playlistInfo))
+        await dispatch(setIsPlaying(true))
+        setLocalIsPlaying(true)
+    }
+
+    const loadFirstSong = async () => {
+        await dispatch(setCurrentTrackInfo(song))
+        await dispatch(setCurrentTrackData(song.track_id, playlistInfo))
+        setLocalIsPlaying(true)
+        await dispatch(setIsPlaying(true))
+    }
+    const setPlayPause = async (playStatus) => {
+        if (playStatus) {
+            setLocalIsPlaying(true)
+            await dispatch(setIsPlaying(true))
+        }
+        else {
+            setLocalIsPlaying(false)
+            await dispatch(setIsPlaying(false))
+        }
+    }
 
     useEffect(() => {
         const status = (is_liked === 1) ? true : false
@@ -25,11 +50,21 @@ export const SongPreview = ({ song }) => {
         setIsLiking(status)
     }, [])
 
+    useEffect(() => {
+
+        return () => {
+            setLocalIsPlaying(false) //NEED TWEEKS
+        }
+    }, [currentTrack])
+
+
+
 
     useEffect(() => {
+        if (!playlistInfo) return
         if (currentTrack.data) {
             if (isPlaying) {
-                console.log('play');
+                // console.log('play');
                 currentTrack.data.play()
             }
             else {
@@ -41,39 +76,19 @@ export const SongPreview = ({ song }) => {
 
     const onSetCurrTrack = async (playStatus) => {
         if (!currentTrack.info) { // Load first song
-            await dispatch(setCurrentTrackInfo(song))
-            await dispatch(setCurrentTrackData(song.track_id, playlistInfo))
-            setLocalIsPlaying(true)
-            await dispatch(setIsPlaying(true))
+            loadFirstSong(playStatus)
         }
-
-        else if (song !== currentTrack.info) { // Load osher song
-            setLocalIsPlaying(true) //check
-            await dispatch(setIsPlaying(false))
-            await dispatch(setCurrentTrackInfo(song))
-            await dispatch(setCurrentTrackData(song.track_id, playlistInfo))
-            await dispatch(setIsPlaying(true))
-            setLocalIsPlaying(true)
+        else if (song !== currentTrack.info) { // Load other song
+            loadOtherSong()
         }
-
         else { // Pause / Play
-            if (playStatus) {
-                setLocalIsPlaying(true)
-                await dispatch(setIsPlaying(true))
-            }
-            else {
-                setLocalIsPlaying(false)
-                await dispatch(setIsPlaying(false))
-
-            }
+            setPlayPause(playStatus)
         }
     }
-
 
     const onSetLike = (status) => {
         playlistService.setTrackLike(track_id, status)
         const statusBool = (status === 1) ? true : false
-
         setIsLiking(statusBool)
     }
 
@@ -86,8 +101,6 @@ export const SongPreview = ({ song }) => {
             <div className="heart-container">
                 {(isLiking === false) && <Heart onClick={() => { onSetLike(1) }} className="heart " />}
                 {(isLiking === true) && <FilledHeart onClick={() => { onSetLike(0) }} className="heart " />}
-                {/* {(is_liked===0 ) && <Heart onClick={() => { onSetLike(1) }} className="heart " />}
-                {(is_liked ===1) && <FilledHeart onClick={() => { onSetLike(0) }} className="heart " />} */}
             </div>
             <p className="song-title cell">{name.length > 30 ? txtSlice(name, 30) : name}</p>
             <p className="song-artist cell" >

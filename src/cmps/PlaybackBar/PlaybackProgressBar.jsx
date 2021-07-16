@@ -11,10 +11,8 @@ export const PlaybackProgressBar = () => {
     const elRef = useRef();
 
     const { currentTrack, playlistTracks, playlistInfo, isPlaying } = useSelector(state => state.playlistModule)
-    let interval =null
+    let interval = null
     const [passedTime, setPassedTime] = useState(null)
-    const [currTime, setCurrTime] = useState(0)
-    const [duration, setDuration] = useState(0)
 
     useEffect(() => {
         if (currentTrack.data) {
@@ -26,7 +24,7 @@ export const PlaybackProgressBar = () => {
         }
     }, [isPlaying])
 
-//CHRECK
+    //CHRECK
 
     // useEffect(() => { 
     //     console.log('change song');
@@ -38,13 +36,10 @@ export const PlaybackProgressBar = () => {
     //                 }
     //         }
     //     }, [currentTrack.info])
-        
-        
-        useEffect(() => {
-            if (!isNaN(currentTrack?.data?.duration)) {
-                setDuration(currentTrack?.data?.duration)
-            }
-            interval = setInterval(passedTimeInterval, 1000);
+
+
+    useEffect(() => {
+        interval = setInterval(passedTimeInterval, 1000);
 
 
     }, [currentTrack?.data?.duration])
@@ -74,18 +69,8 @@ export const PlaybackProgressBar = () => {
         await dispatch(setIsPlaying())
     }
 
-    const skip = async () => {
-        if(currentTrack?.data?.currentTime){
-            console.log(currentTrack.data.currentTime);
-            currentTrack.data.currentTime=30.323232 
-            console.log(currentTrack.data.currentTime);
-        }
-        // await dispatch(skipTen())
-
-    }
-
     const timeFormat = (time) => {
-        if (isNaN(time) || !time) return
+        if (isNaN(time) || !time || time === Infinity) return
 
         var date = new Date(0);
         date.setSeconds(time); // specify value for SECONDS here
@@ -95,10 +80,10 @@ export const PlaybackProgressBar = () => {
 
     return (
         <section className="main-progress-bar">
-            {/* <button onClick={() => { skip() }}>Skip</button> */}
-            {/* <p>{timeFormat(passedTime)}</p> */}
+            <p>{timeFormat(passedTime)}</p>
             <progress ref={elRef} value="0" max="100">  </progress>
             {/* <p className="total-time" >{timeFormat(duration)}</p> */}
+            <p className="total-time" >{timeFormat(currentTrack?.data?.duration)}</p>
         </section >
     )
 }

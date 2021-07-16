@@ -83,9 +83,11 @@ async function setTrackLike(trackId, LiksStatus) {
     }
 }
 
-async function notifyPlayedSong(playListId, trackId) {
+async function notifyPlayedSong(playlistId, trackId) {
     try {
-        const encryptedToken = getEncryptedToken(TOKEN)
+        // const encryptedToken = getEncryptedToken(TOKEN)
+        await axios.post(`https://api.sprintt.co/music/liked_tracks/${playlistId}/${trackId}`,null, options)
+
     }
     catch (err) {
         throw err
@@ -102,6 +104,10 @@ const getEncryptedToken = (token) => {
 }
 
 const options = {
-    headers: { 'user-access-token': `${TOKEN}` }
+    headers: {
+         'user-access-token': `${TOKEN}` ,
+        //  'Access-Control-Allow-Origin': "*"
+
+}
 };
 

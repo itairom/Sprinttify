@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentTrackInfo, setIsPlaying, setCurrentTrackData } from '../actions/PlaylistAction'
 
 
-const _PlayListCarousel = ({playlistName,playlists}) => {
+const _PlayListCarousel = ({ playlistName, playlists }) => {
     const dispatch = useDispatch()
     const [currPage, setCurrPage] = useState(0)
     const [arrowState, setArrowState] = useState('left')
@@ -14,10 +14,10 @@ const _PlayListCarousel = ({playlistName,playlists}) => {
     const { isPlaying, currentTrack, playlistInfo } = useSelector(state => state.playlistModule)
 
     useEffect(() => {
-        if(playlists){
+        if (playlists) {
             playlistPaging()
         }
-        return ()=>{}
+        return () => { }
     }, [playlists])
 
     const playlistPaging = () => {

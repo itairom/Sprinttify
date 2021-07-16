@@ -11,46 +11,68 @@ export const PlayList = ({ playlist }) => {
     const { isPlaying, currentTrack, playlistInfo, playlistTracks } = useSelector(state => state.playlistModule)
     const [localIsPlaying, setLocalIsPlaying] = useState(false)
 
-    const onSetPlaylist = () => {
-        dispatch(setPlaylistHeadrInfo(playlist))
-    }
+    // const onSetPlaylist = () => {
+    //     dispatch(setPlaylistHeadrInfo(playlist))
+    // }
     const { playlist_id, name, description, image_url } = playlist
 
     useEffect(() => {
-        if (playlistTracks.length > 0) {
-            if (playlist_id === playlistInfo?.playlist_id) {
-                const setCurrTrack = async () => {
-                    await dispatch(setCurrentTrackInfo(playlistTracks[0]))
-                    await dispatch(setCurrentTrackData(playlistTracks[0].track_id, playlistInfo))
-                     dispatch(setIsPlaying(true))
-                    setLocalIsPlaying(true)
+
+        const onplay = async () => {
+            if (playlistTracks.length > 0) {
+                if (playlist_id === playlistInfo?.playlist_id) {
+                    // if (localIsPlaying) setLocalIsPlaying(false)
+                    // if (isPlaying) await dispatch(setIsPlaying(false))
+                    onPlayFirstSong()
                 }
-                setCurrTrack()
             }
         }
-        return () => { }
+        onplay()
+        return () => {
+            setLocalIsPlaying(false)
+        }
     }, [playlistInfo])
 
-    // useEffect(() => {
-    //     console.log(currentTrack.data);
-    //     if (currentTrack.data) {
-    //         if (isPlaying) {
-    //             currentTrack.data.play()
-    //             console.log('PLAY ');  
-    //         }
-    //         else {
-    //             currentTrack.data.pause()
-    //         }
-    //     }
-    // }, [isPlaying])
+    useEffect(() => {
+        // console.log(currentTrack.data);
+        if (currentTrack.data) {
+            if (isPlaying) {
+                currentTrack.data.play()
+            }
+            else {
+                currentTrack.data.pause()
+            }
+        }
+    }, [isPlaying])
 
-    const onPlayFirstSong = () => {
-        console.log('onPlayFirstSong()');
+    const onSetPlaylist = () => {
         const loadPlaylist = async () => {
             await dispatch(getPlaylistTracks(playlist_id))
             await dispatch(setPlaylistHeadrInfo(playlist))
         }
+        if (currentTrack.data) { //Play after song already loading
+            dispatch(setIsPlaying(true))
+            setLocalIsPlaying(true)
+        }
         loadPlaylist()
+    }
+
+    const onPlayFirstSong = () => {
+        const setCurrTrack = async () => {
+            if (localIsPlaying) setLocalIsPlaying(false)
+            if (isPlaying) dispatch(setIsPlaying(false))
+            await dispatch(setCurrentTrackInfo(playlistTracks[0]))
+            await dispatch(setCurrentTrackData(playlistTracks[0].track_id, playlistInfo))
+            dispatch(setIsPlaying(true))
+            setLocalIsPlaying(true)
+        }
+        setCurrTrack()
+    }
+
+    const OnPause = async () => {
+
+        setLocalIsPlaying(false)
+        await dispatch(setIsPlaying(false))
     }
 
 
@@ -60,8 +82,8 @@ export const PlayList = ({ playlist }) => {
             <div className="playlist-image">
                 <img src={image_url} alt="img" />
                 <div className="playlist-play">
-                    {!localIsPlaying && <PlaylistPlay onClick={() => { onPlayFirstSong() }} />}
-                    {localIsPlaying && <PlaylistPause />}
+                    {!localIsPlaying && <PlaylistPlay onClick={() => { onSetPlaylist() }} />}
+                    {localIsPlaying && <PlaylistPause onClick={() => { OnPause() }} />}
                 </div>
             </div>
             <Link onClick={() => { onSetPlaylist() }} to={`/home/${playlist_id}`}>
