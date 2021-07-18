@@ -11,7 +11,8 @@ export const axiosService = {
     getPlaylingTrack,
     notifyPlayedSong,
     setTrackLike,
-    getLikedSongsPlaylist
+    getLikedSongsPlaylist,
+    getGenreList
 }
 
 async function getFeaturedPlaylist() {
@@ -76,7 +77,7 @@ async function getPlaylingTrack(trackId) {
 async function setTrackLike(trackId, LiksStatus) {
     const status = (LiksStatus === 1) ? true : false
     try {
-       await axios.post(`https://api.sprintt.co/music/liked_tracks/${trackId}?status=${status}`,null, options)
+        await axios.post(`https://api.sprintt.co/music/liked_tracks/${trackId}?status=${status}`, null, options)
     }
     catch (err) {
         throw err
@@ -86,7 +87,7 @@ async function setTrackLike(trackId, LiksStatus) {
 async function notifyPlayedSong(playlistId, trackId) {
     try {
         // const encryptedToken = getEncryptedToken(TOKEN)
-        await axios.post(`https://api.sprintt.co/music/liked_tracks/${playlistId}/${trackId}`,null, options)
+        await axios.post(`https://api.sprintt.co/music/liked_tracks/${playlistId}/${trackId}`, null, options)
 
     }
     catch (err) {
@@ -94,6 +95,16 @@ async function notifyPlayedSong(playlistId, trackId) {
     }
 }
 
+
+async function getGenreList() {
+    try {
+        let res = await axios.get('https://api.sprintt.co/music/categories', options)
+        return res.data.categories
+    }
+    catch (err) {
+        console.error(err);
+    }
+}
 
 
 const getEncryptedToken = (token) => {
@@ -105,9 +116,9 @@ const getEncryptedToken = (token) => {
 
 const options = {
     headers: {
-         'user-access-token': `${TOKEN}` ,
+        'user-access-token': `${TOKEN}`,
         //  'Access-Control-Allow-Origin': "*"
 
-}
+    }
 };
 

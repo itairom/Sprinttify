@@ -1,0 +1,11 @@
+.genre-list {
+    // display: grid;
+    // grid-template-columns: auto auto auto;
+    // gap:16px ;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -16px;
+    .genre-preview {
+        margin: 16px;
+    }
+}

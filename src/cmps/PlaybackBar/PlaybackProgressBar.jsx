@@ -1,10 +1,7 @@
-
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { skipTen, setIsPlaying, setCurrentTrackInfo, setCurrentTrackData, setCurrentTrackDuration } from '../../actions/PlaylistAction'
+import {  setIsPlaying, setCurrentTrackInfo, setCurrentTrackData } from '../../actions/PlaylistAction'
 import { playlistService } from '../../services/playlistService'
-
-
 
 export const PlaybackProgressBar = () => {
     const dispatch = useDispatch()
@@ -35,13 +32,11 @@ export const PlaybackProgressBar = () => {
     //                     clearInterval(interval)
     //                 }
     //         }
-    //     }, [currentTrack.info])
+    //     }, [currentTrack.data])
 
 
     useEffect(() => {
         interval = setInterval(passedTimeInterval, 1000);
-
-
     }, [currentTrack?.data?.duration])
     // }, [])
 

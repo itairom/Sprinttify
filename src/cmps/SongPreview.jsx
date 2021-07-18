@@ -30,8 +30,8 @@ export const SongPreview = ({ song }) => {
     const loadFirstSong = async () => {
         await dispatch(setCurrentTrackInfo(song))
         await dispatch(setCurrentTrackData(song.track_id, playlistInfo))
-        setLocalIsPlaying(true)
         await dispatch(setIsPlaying(true))
+        setLocalIsPlaying(true)
     }
     const setPlayPause = async (playStatus) => {
         if (playStatus) {
@@ -44,21 +44,19 @@ export const SongPreview = ({ song }) => {
         }
     }
 
+    
     useEffect(() => {
-        const status = (is_liked === 1) ? true : false
-
-        setIsLiking(status)
-    }, [])
-
-    useEffect(() => {
+        // setLocalIsPlaying(true) //NEED TWEEKS
 
         return () => {
             setLocalIsPlaying(false) //NEED TWEEKS
         }
-    }, [currentTrack])
+    }, [currentTrack.data])
 
-
-
+    useEffect(() => {
+        const status = (is_liked === 1) ? true : false
+        setIsLiking(status)
+    }, [])
 
     useEffect(() => {
         if (!playlistInfo) return
@@ -73,6 +71,8 @@ export const SongPreview = ({ song }) => {
             }
         }
     }, [isPlaying])
+
+    
 
     const onSetCurrTrack = async (playStatus) => {
         if (!currentTrack.info) { // Load first song

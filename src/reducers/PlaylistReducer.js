@@ -8,23 +8,22 @@ const initialState = {
     playlistInfo: null,
     currentTrack: { info: null, data: null },
     isPlaying: false,
-    likedSongsPlaylist: []
+    likedSongsPlaylist: [],
+    genres:[]
 }
 export default function PlaylistReducer(state = initialState, action) {
     switch (action.type) {
 
-        // case 'SET_LIKE':
-        //     return {
-        //         ...state, currentTrack: {
-        //             ...state.currentTrack, data: {
-        //                 ...state.currentTrack.data, isliked: 1//action//!state.currentTrack.data.isliked
-        //             }
-        //         }
-        //     }
         case 'SET_IS_PLAYING':
             return {
                 ...state,
                 isPlaying: action.isPlaying
+            }
+        case 'SET_GENRE_LIST':
+            console.log(action);
+            return {
+                ...state,
+                genres: action.genres
             }
         case 'SET_LIKED_SONGS':
             const {liked_tracks} = action.likedSongsPlaylist

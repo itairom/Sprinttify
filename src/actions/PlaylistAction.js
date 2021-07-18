@@ -12,8 +12,8 @@ const _setPlaylistHeadrInfo = (playlistInfo) => ({ type: 'SET_PLAYLIST_HEADER', 
 const _setIsPlaying = (isPlaying) => ({ type: 'SET_IS_PLAYING', isPlaying });
 const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
 const _setCurrentTrackData = (trackData) => ({ type: 'SET_CURRENT_TRACK_DATA', trackData });
-const _skipTen = () => ({ type: 'SKIP_TEN' });
 const _setLikedPlaylist = (likedSongsPlaylist) => ({ type: 'SET_LIKED_SONGS', likedSongsPlaylist })
+const _LoadGenres = (genres) => ({ type: 'SET_GENRE_LIST', genres })
 
 // THUNK
 export function setIsPlaying(isPlaying) {
@@ -55,6 +55,15 @@ export function setCurrentTrackInfo(track) {
         dispatch(_setCurrentTrack(track));
     }
 }
+export function LoadGenres() {
+    return async (dispatch) => {
+        const genres = await playlistService.getGenreList()
+        console.log("🚀 ~ file: PlaylistAction.js ~ line 61 ~ return ~ genres", genres)
+        dispatch(_LoadGenres(genres));
+    }
+}
+
+
 export function setCurrentTrackData(trackId, playlistInfo) {
     return async (dispatch) => {
         let trackData = await playlistService.getTrackData(trackId)
@@ -78,7 +87,4 @@ export function getPlaylistTracks(id, filterBy='') {
 }
 export function setFilter(filterBy) {
     return (dispatch) => dispatch(_setFilter(filterBy))
-}
-export function skipTen() {
-    return (dispatch) => dispatch(_skipTen())
 }

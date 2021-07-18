@@ -10,7 +10,8 @@ export const playlistService = {
     playNextTrack,
     playPreviousTrack,
     setTrackLike,
-    getLikedSongsPlaylist
+    getLikedSongsPlaylist,
+    getGenreList
 }
 
 async function query() {
@@ -75,6 +76,11 @@ async function setTrackLike(trackId, LiksStatus) {
 async function getLikedSongsPlaylist() {
     const likedPlaylist = await axiosService.getLikedSongsPlaylist()
     return likedPlaylist
+}
+
+async function getGenreList() {
+    const res = await axiosService.getGenreList()
+    return res
 }
 
 
