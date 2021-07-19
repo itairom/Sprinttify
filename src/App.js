@@ -8,6 +8,7 @@ import { Browse } from './pages/Browse';
 import { LikedSongs } from './pages/LikedSongs';
 import { PlayListPage } from './pages/PlaylistPage';
 import { MainPlaybackBar } from './cmps/PlaybackBar/MainPlaybackBar';
+import { GenrePage } from './pages/GenrePage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Switch>
         <Route path="/home/:id" component={PlayListPage} />
         <Route path="/home" component={Home} />
+        <Route path="/browse/:id" component={GenrePage} />
         <Route path="/browse" component={Browse} />
         <Route path="/likedsongs" component={LikedSongs} />
       </Switch>

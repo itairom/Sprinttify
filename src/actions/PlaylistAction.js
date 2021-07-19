@@ -9,12 +9,19 @@ const _setPlaylistTracks = (tracks) => ({ type: 'SET_PLAYLIST_TRACKS', tracks })
 const _setPlaylistDuration = (tracks) => ({ type: 'SET_PLAYLIST_DURATION', tracks });
 const _setFilter = (filterBy) => ({ type: 'SET_FILTER', filterBy });
 const _setPlaylistHeadrInfo = (playlistInfo) => ({ type: 'SET_PLAYLIST_HEADER', playlistInfo });
-const _setIsPlaying = (isPlaying) => ({ type: 'SET_IS_PLAYING',isPlaying });
+const _setIsPlaying = (isPlaying) => ({ type: 'SET_IS_PLAYING', isPlaying });
 const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
 const _setCurrentTrackData = (trackData) => ({ type: 'SET_CURRENT_TRACK_DATA', trackData });
-const _skipTen = () => ({ type: 'SKIP_TEN' });
+const _setLikedPlaylist = (likedSongsPlaylist) => ({ type: 'SET_LIKED_SONGS', likedSongsPlaylist })
+const _LoadGenres = (genres) => ({ type: 'SET_GENRE_LIST', genres })
+const _setBrowseGenre = (browseGenre) => ({ type: 'SET_BROWSE_GENRE', browseGenre })
 
 // THUNK
+export function setBrowseGenre(browseGenre) {
+    return async (dispatch) => {
+        dispatch(_setBrowseGenre(browseGenre));
+    }
+}
 export function setIsPlaying(isPlaying) {
     return async (dispatch) => {
         dispatch(_setIsPlaying(isPlaying));
@@ -43,11 +50,26 @@ export function setPlaylistHeadrInfo(playlistInfo) {
         dispatch(_setPlaylistHeadrInfo(playlistInfo));
     }
 }
+export function setLikedPlaylist() {
+    return async (dispatch) => {
+        const likedSongsPlaylist = await playlistService.getLikedSongsPlaylist()
+        dispatch(_setLikedPlaylist(likedSongsPlaylist));
+    }
+}
 export function setCurrentTrackInfo(track) {
     return async (dispatch) => {
         dispatch(_setCurrentTrack(track));
     }
 }
+export function LoadGenres() {
+    return async (dispatch) => {
+        const genres = await playlistService.getGenreList()
+        console.log("🚀 ~ file: PlaylistAction.js ~ line 61 ~ return ~ genres", genres)
+        dispatch(_LoadGenres(genres));
+    }
+}
+
+
 export function setCurrentTrackData(trackId, playlistInfo) {
     return async (dispatch) => {
         let trackData = await playlistService.getTrackData(trackId)
@@ -55,7 +77,7 @@ export function setCurrentTrackData(trackId, playlistInfo) {
         dispatch(_setCurrentTrackData(trackData));
     }
 }
-export function getPlaylistTracks(id, filterBy) {
+export function getPlaylistTracks(id, filterBy='') {
     return async (dispatch) => {
         const tracks = await axiosService.getPlaylistTracks(id);
         let localFilterd = tracks.tracks
@@ -71,7 +93,4 @@ export function getPlaylistTracks(id, filterBy) {
 }
 export function setFilter(filterBy) {
     return (dispatch) => dispatch(_setFilter(filterBy))
-}
-export function skipTen() {
-    return (dispatch) => dispatch(_skipTen())
 }

@@ -8,7 +8,11 @@ export const playlistService = {
     getTrackData,
     notifyPlayedSong,
     playNextTrack,
-    playPreviousTrack
+    playPreviousTrack,
+    setTrackLike,
+    getLikedSongsPlaylist,
+    getGenreList,
+    getGenrePlayslists
 }
 
 async function query() {
@@ -38,7 +42,6 @@ async function getTrackData(id) {
 }
 
 async function notifyPlayedSong(playlistInfo, trackId) {
-    // const track =
     await axiosService.notifyPlayedSong(playlistInfo.playlist_id, trackId)
 }
 
@@ -48,7 +51,6 @@ function playNextTrack(playlist, trackId) {
     playlist.forEach((track, idx) => {
         if (track.track_id === trackId) {
             nextTrack = (playlist[idx + 1]);
-            // if (typeof nextTrack === undefined) return
         }
     })
     if (!nextTrack) return
@@ -61,14 +63,30 @@ function playPreviousTrack(playlist, trackId) {
     playlist.forEach((track, idx) => {
         if (track.track_id === trackId) {
             previousTrack = (playlist[idx - 1]);
-            // if (typeof previousTrack === undefined) return
         }
     })
     if (!previousTrack) return
     return previousTrack
 }
 
+async function setTrackLike(trackId, LiksStatus) {
+    await axiosService.setTrackLike(trackId, LiksStatus)
 
+}
+
+async function getLikedSongsPlaylist() {
+    const likedPlaylist = await axiosService.getLikedSongsPlaylist()
+    return likedPlaylist
+}
+
+async function getGenreList() {
+    const res = await axiosService.getGenreList()
+    return res
+}
+async function getGenrePlayslists(id) {
+    const res = await axiosService.getGenrePlayslists(id)
+    return res
+}
 
 
 

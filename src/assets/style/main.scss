@@ -19,11 +19,19 @@
 @import "cmps/songList";
 @import "cmps/songPreview";
 @import "cmps/songFilter";
+
+//PLAYBACK CMPS
 @import "cmps/playbackBar/leftPlayback\ ";
 @import "cmps/playbackBar/mainPlayback";
 @import "cmps/playbackBar/playbackControl";
 @import "cmps/playbackBar/playbackProgressBar";
 @import "cmps/playbackBar/volumeBar";
+
+// GENRE CMPS
+
+@import "cmps/genre/genrePreview";
+@import "cmps/genre/genreList";
+
 
 //PAGES
 
@@ -31,3 +39,4 @@
 @import "pages/browse";
 @import "pages/likedSongs";
 @import "pages/playlistPage";
+@import "pages/genrePage";

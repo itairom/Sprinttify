@@ -4,14 +4,11 @@ import { useSelector } from 'react-redux'
 import { ReactComponent as Volume } from '../../assets/imgs/volume.svg'
 import { useRelativeMousePosition } from '../../services/customHooks'
 export const VolumeBar = () => {
-
-
+    
     const position = useRelativeMousePosition()
-    const { currentTrack, isPlaying } = useSelector(state => state.playlistModule)
-
-
-
+    const { currentTrack } = useSelector(state => state.playlistModule)
     const inputEl = useRef(null)
+    
     useEffect(() => {
         // if (position.x > 0 && position.x < 100 && position.location === 'volume-progress') {
         if (position.location === 'volume-progress') {
@@ -19,17 +16,13 @@ export const VolumeBar = () => {
         }
     }, [position])
 
-
     const onSetVolume = () => {
         inputEl.current.attributes[1].nodeValue = position.x
         if (currentTrack?.data?.volume) {
             let volume = ( position.x/100)
-            console.log(volume);
             currentTrack.data.volume = volume
         }
-
     }
-
 
     return (
         <section className="volume-bar">

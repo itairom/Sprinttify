@@ -1,20 +1,15 @@
-
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { skipTen, setIsPlaying, setCurrentTrackInfo, setCurrentTrackData, setCurrentTrackDuration } from '../../actions/PlaylistAction'
+import {  setIsPlaying, setCurrentTrackInfo, setCurrentTrackData } from '../../actions/PlaylistAction'
 import { playlistService } from '../../services/playlistService'
-
-
 
 export const PlaybackProgressBar = () => {
     const dispatch = useDispatch()
     const elRef = useRef();
 
     const { currentTrack, playlistTracks, playlistInfo, isPlaying } = useSelector(state => state.playlistModule)
-    let interval =null
+    let interval = null
     const [passedTime, setPassedTime] = useState(null)
-    const [currTime, setCurrTime] = useState(0)
-    const [duration, setDuration] = useState(0)
 
     useEffect(() => {
         if (currentTrack.data) {
@@ -26,25 +21,22 @@ export const PlaybackProgressBar = () => {
         }
     }, [isPlaying])
 
+    //CHRECK
+
+    // useEffect(() => { 
+    //     console.log('change song');
+    //     elRef.current.value = 0
+    //     return () => {
+    //         if (currentTrack.data) {
+    //                     currentTrack.data.pause()
+    //                     clearInterval(interval)
+    //                 }
+    //         }
+    //     }, [currentTrack.data])
+
+
     useEffect(() => {
-        console.log('change song');
-        elRef.current.value = 0
-        return () => {
-            if (currentTrack.data) {
-                        currentTrack.data.pause()
-                        clearInterval(interval)
-                    }
-            }
-        }, [currentTrack.info])
-        
-        
-        useEffect(() => {
-            if (!isNaN(currentTrack?.data?.duration)) {
-                setDuration(currentTrack?.data?.duration)
-            }
-            interval = setInterval(passedTimeInterval, 1000);
-
-
+        interval = setInterval(passedTimeInterval, 1000);
     }, [currentTrack?.data?.duration])
     // }, [])
 
@@ -72,19 +64,8 @@ export const PlaybackProgressBar = () => {
         await dispatch(setIsPlaying())
     }
 
-
-
-
-    const skip = async () => {
-        console.log(currentTrack.data.currentTime);
-        currentTrack.data.pause()
-        await dispatch(skipTen())
-        console.log(currentTrack.data.currentTime);
-
-    }
-
     const timeFormat = (time) => {
-        if (isNaN(time) || !time) return
+        if (isNaN(time) || !time || time === Infinity) return
 
         var date = new Date(0);
         date.setSeconds(time); // specify value for SECONDS here
@@ -94,10 +75,10 @@ export const PlaybackProgressBar = () => {
 
     return (
         <section className="main-progress-bar">
-            {/* <button onClick={() => { skip() }}>Skip</button> */}
-            {/* <p>{timeFormat(passedTime)}</p> */}
+            <p>{timeFormat(passedTime)}</p>
             <progress ref={elRef} value="0" max="100">  </progress>
             {/* <p className="total-time" >{timeFormat(duration)}</p> */}
+            <p className="total-time" >{timeFormat(currentTrack?.data?.duration)}</p>
         </section >
     )
 }

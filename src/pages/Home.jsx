@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux"
 import { PlayListCarousel } from '../cmps/PlayListCarousel'
 import { playlistService } from '../services/playlistService'
 export const Home = () => {
 
-    // const dispatch = useDispatch()
     const [playlists, setPlaylists] = useState([])
-    // const { filterBy, featuredPlaylist } = useSelector(state => state.playlistModule)
-
-    // useEffect(() => {
-    //     dispatch(loadFeatured(filterBy))
-    // }, [filterBy])
-
-    // useEffect(() => {
-    //     console.log(featuredPlaylist);
-    // }, [featuredPlaylist])
 
     useEffect(() => {
         (async function () {

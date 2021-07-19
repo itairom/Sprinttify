@@ -2,13 +2,18 @@ import axios from 'axios'
 
 const TOKEN = '1e6be782-0600-4b32-9674-5a4488ae6cd4';
 
+
 export const axiosService = {
     getFeaturedPlaylist,
     getMoodPlaylist,
     getRecentlyPlayedPlaylist,
     getPlaylistTracks,
     getPlaylingTrack,
-    notifyPlayedSong
+    notifyPlayedSong,
+    setTrackLike,
+    getLikedSongsPlaylist,
+    getGenreList,
+    getGenrePlayslists
 }
 
 async function getFeaturedPlaylist() {
@@ -49,6 +54,16 @@ async function getPlaylistTracks(id) {
     }
 }
 
+async function getLikedSongsPlaylist() {
+    try {
+        const resp = await axios.get(`https://api.sprintt.co/music/liked_tracks?limit=100`, options)
+        return resp.data
+    }
+    catch (err) {
+        throw err
+    }
+}
+
 async function getPlaylingTrack(trackId) {
     try {
         const encryptedToken = getEncryptedToken(TOKEN)
@@ -59,16 +74,45 @@ async function getPlaylingTrack(trackId) {
         throw err
     }
 }
-async function notifyPlayedSong(playListId, trackId) {
+
+async function setTrackLike(trackId, LiksStatus) {
+    const status = (LiksStatus === 1) ? true : false
     try {
-        const encryptedToken = getEncryptedToken(TOKEN)
+        await axios.post(`https://api.sprintt.co/music/liked_tracks/${trackId}?status=${status}`, null, options)
     }
     catch (err) {
         throw err
     }
 }
 
+async function notifyPlayedSong(playlistId, trackId) {
+    try {
+        await axios.post(`https://api.sprintt.co/music/liked_tracks/${playlistId}/${trackId}`, null, options)
 
+    }
+    catch (err) {
+        throw err
+    }
+}
+
+async function getGenreList() {
+    try {
+        let res = await axios.get('https://api.sprintt.co/music/categories', options)
+        return res.data.categories
+    }
+    catch (err) {
+        console.error(err);
+    }
+}
+async function getGenrePlayslists(id) {
+    try {
+        let res = await axios.get(`https://api.sprintt.co/music/category_playlists/${id}`, options)
+        return res.data
+    }
+    catch (err) {
+        console.error(err);
+    }
+}
 
 const getEncryptedToken = (token) => {
     let date = new Date();
@@ -77,8 +121,10 @@ const getEncryptedToken = (token) => {
     return btoa(stringToEncrypt)
 }
 
-
 const options = {
-    headers: { 'user-access-token': `${TOKEN}` }
+    headers: {
+        'user-access-token': `${TOKEN}`,
+        //  'Access-Control-Allow-Origin': "*"
+    }
 };
 

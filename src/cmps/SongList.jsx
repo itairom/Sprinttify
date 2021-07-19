@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { SongPreview } from '../cmps/SongPreview'
 
 const _SongList = ({ playlistTracks }) => {
