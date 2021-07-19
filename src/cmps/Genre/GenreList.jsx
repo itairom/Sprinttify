@@ -5,7 +5,6 @@ import { GenrePreview } from "./GenrePreview";
 export const GenreList = ({ genres }) => {
 
     useEffect(() => {
-        console.log(genres);
         return ()=>{}
     },[genres] )
 

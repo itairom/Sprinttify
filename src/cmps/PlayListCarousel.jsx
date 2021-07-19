@@ -11,9 +11,10 @@ const _PlayListCarousel = ({ playlistName, playlists }) => {
     const [currPage, setCurrPage] = useState(0)
     const [arrowState, setArrowState] = useState('left')
     const [currCarousel, setCurrCarousel] = useState([])
-    const { isPlaying, currentTrack, playlistInfo } = useSelector(state => state.playlistModule)
+    // const { isPlaying, currentTrack, playlistInfo } = useSelector(state => state.playlistModule)
 
     useEffect(() => {
+        if (!playlists) return
         if (playlists) {
             playlistPaging()
         }
@@ -21,7 +22,8 @@ const _PlayListCarousel = ({ playlistName, playlists }) => {
     }, [playlists])
 
     const playlistPaging = () => {
-        const currDisplay = playlists.slice(currPage, currPage + 5)
+        const currDisplay = playlists?.slice(currPage, currPage + 5)
+
         setCurrCarousel(currDisplay)
     }
 
@@ -34,18 +36,9 @@ const _PlayListCarousel = ({ playlistName, playlists }) => {
         playlistPaging()
     }
 
-    // const onPlayFirstSong=()=>{
-    //     console.log(playlists);
-    //     await dispatch(setCurrentTrackInfo(song))
-    //     await dispatch(setCurrentTrackData(song.track_id, playlistInfo))
-    //     setLocalIsPlaying(true)
-    //     await dispatch(setIsPlaying(true))
-    // }
-
     return (
         <div className='main-carousel'>
             <div className="top-section">
-                <p>{playlistName}</p>
                 <div className="navs">
                     <LeftNav className={arrowState === 'left' ? 'nav-btn ' : 'nav-btn active'}
                         onClick={() => { setNavBtn(0, 'left') }} />

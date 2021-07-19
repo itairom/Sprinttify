@@ -11,9 +11,6 @@ export const PlayList = ({ playlist }) => {
     const { isPlaying, currentTrack, playlistInfo, playlistTracks } = useSelector(state => state.playlistModule)
     const [localIsPlaying, setLocalIsPlaying] = useState(false)
 
-    // const onSetPlaylist = () => {
-    //     dispatch(setPlaylistHeadrInfo(playlist))
-    // }
     const { playlist_id, name, description, image_url } = playlist
 
     useEffect(() => {

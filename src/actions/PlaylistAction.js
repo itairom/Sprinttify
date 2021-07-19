@@ -14,8 +14,14 @@ const _setCurrentTrack = (track) => ({ type: 'SET_CURRENT_TRACK', track });
 const _setCurrentTrackData = (trackData) => ({ type: 'SET_CURRENT_TRACK_DATA', trackData });
 const _setLikedPlaylist = (likedSongsPlaylist) => ({ type: 'SET_LIKED_SONGS', likedSongsPlaylist })
 const _LoadGenres = (genres) => ({ type: 'SET_GENRE_LIST', genres })
+const _setBrowseGenre = (browseGenre) => ({ type: 'SET_BROWSE_GENRE', browseGenre })
 
 // THUNK
+export function setBrowseGenre(browseGenre) {
+    return async (dispatch) => {
+        dispatch(_setBrowseGenre(browseGenre));
+    }
+}
 export function setIsPlaying(isPlaying) {
     return async (dispatch) => {
         dispatch(_setIsPlaying(isPlaying));

@@ -9,7 +9,8 @@ const initialState = {
     currentTrack: { info: null, data: null },
     isPlaying: false,
     likedSongsPlaylist: [],
-    genres:[]
+    genres: [],
+    browseGenre: null
 }
 export default function PlaylistReducer(state = initialState, action) {
     switch (action.type) {
@@ -19,6 +20,11 @@ export default function PlaylistReducer(state = initialState, action) {
                 ...state,
                 isPlaying: action.isPlaying
             }
+        case 'SET_BROWSE_GENRE':
+            return {
+                ...state,
+                browseGenre: action.browseGenre
+            }
         case 'SET_GENRE_LIST':
             console.log(action);
             return {
@@ -26,7 +32,7 @@ export default function PlaylistReducer(state = initialState, action) {
                 genres: action.genres
             }
         case 'SET_LIKED_SONGS':
-            const {liked_tracks} = action.likedSongsPlaylist
+            const { liked_tracks } = action.likedSongsPlaylist
             return {
                 ...state,
                 likedSongsPlaylist: liked_tracks
