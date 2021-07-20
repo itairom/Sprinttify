@@ -3,17 +3,15 @@ import { PlayList } from './PlayList.jsx';
 import { ReactComponent as RigthNav } from '../assets/imgs/right-nav.svg'
 import { ReactComponent as LeftNav } from '../assets/imgs/left-nav.svg'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentTrackInfo, setIsPlaying, setCurrentTrackData } from '../actions/PlaylistAction'
 
 
 const _PlayListCarousel = ({ playlistName, playlists }) => {
-    const dispatch = useDispatch()
     const [currPage, setCurrPage] = useState(0)
     const [arrowState, setArrowState] = useState('left')
     const [currCarousel, setCurrCarousel] = useState([])
-    // const { isPlaying, currentTrack, playlistInfo } = useSelector(state => state.playlistModule)
 
     useEffect(() => {
+        console.log(playlistName);
         if (!playlists) return
         if (playlists) {
             playlistPaging()
@@ -39,6 +37,7 @@ const _PlayListCarousel = ({ playlistName, playlists }) => {
     return (
         <div className='main-carousel'>
             <div className="top-section">
+                {(playlistName[0]) && <p>{playlistName}</p>}
                 <div className="navs">
                     <LeftNav className={arrowState === 'left' ? 'nav-btn ' : 'nav-btn active'}
                         onClick={() => { setNavBtn(0, 'left') }} />
