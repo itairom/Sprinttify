@@ -21,30 +21,14 @@ export const PlaybackProgressBar = () => {
         }
     }, [isPlaying])
 
-    //CHRECK
-
-    // useEffect(() => { 
-    //     console.log('change song');
-    //     elRef.current.value = 0
-    //     return () => {
-    //         if (currentTrack.data) {
-    //                     currentTrack.data.pause()
-    //                     clearInterval(interval)
-    //                 }
-    //         }
-    //     }, [currentTrack.data])
-
-
     useEffect(() => {
         interval = setInterval(passedTimeInterval, 1000);
     }, [currentTrack?.data?.duration])
-    // }, [])
 
     const passedTimeInterval = () => {
         setInterval(async () => {
             if (currentTrack.data?.currentTime) {
                 if (currentTrack.data?.currentTime === currentTrack.data?.duration) {
-                    // if (currentTrack.data?.ended) {
                     console.log('song ended');
                     await dispatch(setIsPlaying(false))
                     currentTrack.data.pause()
@@ -77,7 +61,6 @@ export const PlaybackProgressBar = () => {
         <section className="main-progress-bar">
             <p>{timeFormat(passedTime)}</p>
             <progress ref={elRef} value="0" max="100">  </progress>
-            {/* <p className="total-time" >{timeFormat(duration)}</p> */}
             <p className="total-time" >{timeFormat(currentTrack?.data?.duration)}</p>
         </section >
     )

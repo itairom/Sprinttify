@@ -55,7 +55,6 @@ export function setLikedPlaylist(filterBy = '') {
         const likedSongsPlaylist = await playlistService.getLikedSongsPlaylist()
         let filterdObj = {}
         if (filterBy ) {
-            console.log('🥶', likedSongsPlaylist.liked_tracks);
             const regex = new RegExp(filterBy.songName, 'i');
             let localFilterd = likedSongsPlaylist.liked_tracks.filter((track) => regex.test(track.name));
             filterdObj.liked_tracks = localFilterd
@@ -85,7 +84,6 @@ export function setCurrentTrackInfo(track) {
 export function LoadGenres() {
     return async (dispatch) => {
         const genres = await playlistService.getGenreList()
-        console.log("🚀 ~ file: PlaylistAction.js ~ line 61 ~ return ~ genres", genres)
         dispatch(_LoadGenres(genres));
     }
 }
@@ -94,7 +92,6 @@ export function LoadGenres() {
 export function setCurrentTrackData(trackId, playlistInfo) {
     return async (dispatch) => {
         let trackData = await playlistService.getTrackData(trackId)
-        // await playlistService.notifyPlayedSong(playlistInfo,trackId) // NOTIFY 
         dispatch(_setCurrentTrackData(trackData));
     }
 }

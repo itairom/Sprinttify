@@ -7,8 +7,6 @@ export const PlaylistHeader = ({ playlistDuration, likedPlaylist, genre, genreLe
 
 
     useEffect(() => {
-        // console.log('playlistTracks', playlistTracks);
-        console.log('genre', genre);
         if (playlistInfo) {
             inputEl.current.style.backgroundImage = `url(${playlistInfo?.image_url})`
         }

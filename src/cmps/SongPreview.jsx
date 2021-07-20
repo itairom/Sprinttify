@@ -62,11 +62,9 @@ export const SongPreview = ({ song }) => {
         if (!playlistInfo) return
         if (currentTrack.data) {
             if (isPlaying) {
-                // console.log('play');
                 currentTrack.data.play()
             }
             else {
-                // console.log('pause');
                 currentTrack.data.pause()
             }
         }

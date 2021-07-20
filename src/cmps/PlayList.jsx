@@ -31,7 +31,6 @@ export const PlayList = ({ playlist }) => {
     }, [playlistInfo])
 
     useEffect(() => {
-        // console.log(currentTrack.data);
         if (currentTrack.data) {
             if (isPlaying) {
                 currentTrack.data.play()

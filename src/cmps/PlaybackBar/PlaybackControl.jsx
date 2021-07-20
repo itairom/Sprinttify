@@ -18,11 +18,9 @@ export const PlaybackControl = () => {
     useEffect(() => {
         if (currentTrack.data) {
             if (isPlaying) {
-                // console.log('play');
                 currentTrack.data.play()
             }
             else {
-                // console.log('pause');
                 currentTrack.data.pause()
             }
         }
@@ -31,8 +29,6 @@ export const PlaybackControl = () => {
     const onNextTrack = async () => {
         await dispatch(setIsPlaying(false))
         const nextTrack=  playlistService.playNextTrack(playlistTracks,currentTrack.info.track_id) 
-        console.log("🚀 ~ file: PlaybackControl.jsx ~ line 34 ~ onNextTrack ~ nextTrack", nextTrack)
-        // if (typeof(nextTrack) === undefined) return
         if (!nextTrack) return
         await dispatch(setCurrentTrackInfo(nextTrack))
         await dispatch(setCurrentTrackData(nextTrack.track_id, playlistInfo))
@@ -41,7 +37,6 @@ export const PlaybackControl = () => {
     const onPreviousTrack = async () => {
         await dispatch(setIsPlaying(false))
         const nextTrack=  playlistService.playPreviousTrack(playlistTracks,currentTrack.info.track_id) 
-        console.log("🚀 ~ file: PlaybackControl.jsx ~ line 34 ~ onNextTrack ~ nextTrack", nextTrack)
         // if (typeof(nextTrack) === undefined) return
         if (!nextTrack) return
         await dispatch(setCurrentTrackInfo(nextTrack))
