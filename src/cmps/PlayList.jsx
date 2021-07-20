@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
-import { setPlaylistHeadrInfo, getPlaylistTracks, setIsPlaying, setCurrentTrackInfo, setCurrentTrackData } from '../actions/PlaylistAction'
+import { setPlaylistHeadrInfo, setPlaylistTracks, setIsPlaying, setCurrentTrackInfo, setCurrentTrackData } from '../actions/PlaylistAction'
 import { ReactComponent as PlaylistPlay } from '../assets/imgs/playlist-play.svg'
 import { ReactComponent as PlaylistPause } from '../assets/imgs/playlist-pause.svg'
 
@@ -44,7 +44,7 @@ export const PlayList = ({ playlist }) => {
 
     const onSetPlaylist = () => {
         const loadPlaylist = async () => {
-            await dispatch(getPlaylistTracks(playlist_id))
+            await dispatch(setPlaylistTracks(playlist_id))
             await dispatch(setPlaylistHeadrInfo(playlist))
         }
         if (currentTrack.data) { //Play after song already loading

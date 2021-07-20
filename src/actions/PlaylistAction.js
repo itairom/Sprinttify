@@ -50,10 +50,31 @@ export function setPlaylistHeadrInfo(playlistInfo) {
         dispatch(_setPlaylistHeadrInfo(playlistInfo));
     }
 }
-export function setLikedPlaylist() {
+export function setLikedPlaylist(filterBy = '') {
     return async (dispatch) => {
         const likedSongsPlaylist = await playlistService.getLikedSongsPlaylist()
-        dispatch(_setLikedPlaylist(likedSongsPlaylist));
+        let filterdObj = {}
+        if (filterBy ) {
+            console.log('🥶', likedSongsPlaylist.liked_tracks);
+            const regex = new RegExp(filterBy.songName, 'i');
+            let localFilterd = likedSongsPlaylist.liked_tracks.filter((track) => regex.test(track.name));
+            filterdObj.liked_tracks = localFilterd
+            dispatch(_setLikedPlaylist(filterdObj));
+        }
+    }
+}
+export function setPlaylistTracks(id, filterBy = '') {
+    return async (dispatch) => {
+        const tracks = await axiosService.setPlaylistTracks(id);
+        let localFilterd = tracks.tracks
+        if (filterBy) {
+            const regex = new RegExp(filterBy.songName, 'i');
+            localFilterd = tracks.tracks.filter((track) => regex.test(track.name));
+            dispatch(_setPlaylistTracks(localFilterd));
+            dispatch(_setPlaylistDuration(tracks.playlist_duration));
+        }
+        dispatch(_setPlaylistTracks(localFilterd));
+        dispatch(_setPlaylistDuration(tracks.playlist_duration));
     }
 }
 export function setCurrentTrackInfo(track) {
@@ -77,20 +98,7 @@ export function setCurrentTrackData(trackId, playlistInfo) {
         dispatch(_setCurrentTrackData(trackData));
     }
 }
-export function getPlaylistTracks(id, filterBy='') {
-    return async (dispatch) => {
-        const tracks = await axiosService.getPlaylistTracks(id);
-        let localFilterd = tracks.tracks
-        if (filterBy) {
-            const regex = new RegExp(filterBy.songName, 'i');
-            localFilterd = tracks.tracks.filter((track) => regex.test(track.name));
-            dispatch(_setPlaylistTracks(localFilterd));
-            dispatch(_setPlaylistDuration(tracks.playlist_duration));
-        }
-        dispatch(_setPlaylistTracks(localFilterd));
-        dispatch(_setPlaylistDuration(tracks.playlist_duration));
-    }
-}
+
 export function setFilter(filterBy) {
     return (dispatch) => dispatch(_setFilter(filterBy))
 }

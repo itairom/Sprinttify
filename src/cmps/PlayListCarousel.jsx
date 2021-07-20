@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PlayList } from './PlayList.jsx';
 import { ReactComponent as RigthNav } from '../assets/imgs/right-nav.svg'
 import { ReactComponent as LeftNav } from '../assets/imgs/left-nav.svg'
-import { useDispatch, useSelector } from 'react-redux';
-
+const PAGE_SIZE = 5
 
 const _PlayListCarousel = ({ playlistName, playlists }) => {
     const [currPage, setCurrPage] = useState(0)
@@ -11,27 +10,24 @@ const _PlayListCarousel = ({ playlistName, playlists }) => {
     const [currCarousel, setCurrCarousel] = useState([])
 
     useEffect(() => {
-        console.log(playlistName);
         if (!playlists) return
         if (playlists) {
-            playlistPaging()
+            setCurrCarousel(playlists.slice(currPage, currPage + PAGE_SIZE))
         }
         return () => { }
     }, [playlists])
 
-    const playlistPaging = () => {
-        const currDisplay = playlists?.slice(currPage, currPage + 5)
-
+    useEffect(() => {
+        const currDisplay = playlists?.slice(currPage, currPage + PAGE_SIZE)
         setCurrCarousel(currDisplay)
-    }
+    }, [currPage])
 
     const setNavBtn = (num, direction) => {
         setArrowState(direction)
-        setCurrPage(num)
         if (playlists.length < 6) {
             setArrowState('')
         }
-        playlistPaging()
+        setCurrPage(num)
     }
 
     return (
@@ -47,7 +43,7 @@ const _PlayListCarousel = ({ playlistName, playlists }) => {
             </div>
 
             <div className='playlist-carousel'>
-                {currCarousel.map(playlist =>
+                {currCarousel?.map(playlist =>
                     <PlayList key={playlist.playlist_id} playlist={playlist} />
                 )}
             </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SongList } from '../cmps/SongList'
-import { getPlaylistTracks, setFilter } from '../actions/PlaylistAction'
+import { setPlaylistTracks, setFilter } from '../actions/PlaylistAction'
 
 import { PlaylistHeader } from '../cmps/PlaylistHeader'
 import { SongFilter } from '../cmps/SongFilter'
@@ -14,7 +14,7 @@ export const PlayListPage = ({ match }) => {
    
     useEffect(() => {
         const loadPlaylist = async () => {
-            dispatch(getPlaylistTracks(id, filterBy))
+            dispatch(setPlaylistTracks(id, filterBy))
         }
         loadPlaylist()
     }, [filterBy])

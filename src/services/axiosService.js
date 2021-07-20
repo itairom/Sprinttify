@@ -7,7 +7,7 @@ export const axiosService = {
     getFeaturedPlaylist,
     getMoodPlaylist,
     getRecentlyPlayedPlaylist,
-    getPlaylistTracks,
+    setPlaylistTracks,
     getPlaylingTrack,
     notifyPlayedSong,
     setTrackLike,
@@ -44,7 +44,7 @@ async function getRecentlyPlayedPlaylist() {
         throw err
     }
 }
-async function getPlaylistTracks(id) {
+async function setPlaylistTracks(id) {
     try {
         const resp = await axios.get(`https://api.sprintt.co/music/playlist_tracks/${id}`, options)
         return resp.data

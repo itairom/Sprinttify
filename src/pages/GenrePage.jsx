@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getPlaylistTracks } from '../actions/PlaylistAction'
+import { setPlaylistTracks } from '../actions/PlaylistAction'
 import { playlistService } from '../services/playlistService'
 import { PlayList } from '../cmps/PlayList'
 import { PlayListCarousel } from '../cmps/PlayListCarousel'
@@ -24,7 +24,7 @@ export const GenrePage = ({ match, props }) => {
 
 
     return (
-        <section className="main-container genre-page">
+        <section className="main-container page genre-page">
             <h1>Genre</h1>
             <div className="genre-playlists">
                 <PlaylistHeader genreLength={playlists.length} genre={browseGenre} />

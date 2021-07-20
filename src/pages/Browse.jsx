@@ -18,7 +18,7 @@ export const Browse = () => {
     }, [genreList])
 
     return (
-        <section className="main-container main-browse">
+        <section className="main-container  browse-page">
             <h1>Genre</h1>
             <GenreList genres={genreList} />
         </section>

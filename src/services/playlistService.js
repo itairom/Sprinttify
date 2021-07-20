@@ -4,7 +4,7 @@ import { axiosService } from '../services/axiosService'
 
 export const playlistService = {
     query,
-    getPlaylistTracksById,
+    setPlaylistTracksById,
     getTrackData,
     notifyPlayedSong,
     playNextTrack,
@@ -26,8 +26,8 @@ async function query() {
     return playlists
 }
 
-async function getPlaylistTracksById(id) {
-    const tracks = await axiosService.getPlaylistTracks(id)
+async function setPlaylistTracksById(id) {
+    const tracks = await axiosService.setPlaylistTracks(id)
     return tracks
 }
 
