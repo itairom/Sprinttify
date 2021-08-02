@@ -36,3 +36,57 @@ export const useRelativeMousePosition = () => {
   return position
 }
 
+// export const useFetch = (query) => {
+
+//   const options = {
+//     headers: {
+//         'user-access-token': '1e6be782-0600-4b32-9674-5a4488ae6cd4',
+//     }
+// };
+//   const [status, setStatus] = useState('idle');
+//   const [data, setData] = useState([]);
+
+//   useEffect(() => {
+//       if (!query) return;
+
+
+//       const fetchData = async () => {
+//         setStatus('fetching');
+//         const response = await fetch(
+//               `https://api.sprintt.co/crypto/currencies/${query}`,options);
+//           const data = await response.json();
+//           setData(data.hits);
+//           setStatus('fetched');
+//       };
+
+//       fetchData();
+//   }, [query]);
+
+//   return { status, data };
+// };
+
+export const useFetch = (url) => {
+  const [status, setStatus] = useState('idle');
+  const [data, setData] = useState([]);
+
+  const options = {
+    headers: {
+        'user-access-token': '1e6be782-0600-4b32-9674-5a4488ae6cd4',
+    }
+};
+
+  useEffect(() => {
+      if (!url) return;
+      const fetchData = async () => {
+          setStatus('fetching');
+          const response = await fetch(url,options);
+          const data = await response.json();
+          setData(data);
+          setStatus('fetched');
+      };
+
+      fetchData();
+  }, [url]);
+
+  return { status, data };
+};

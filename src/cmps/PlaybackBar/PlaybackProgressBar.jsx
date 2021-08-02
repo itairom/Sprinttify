@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  setIsPlaying, setCurrentTrackInfo, setCurrentTrackData } from '../../actions/PlaylistAction'
+import { setIsPlaying, setCurrentTrackInfo, setCurrentTrackData } from '../../actions/PlaylistAction'
 import { playlistService } from '../../services/playlistService'
 
 export const PlaybackProgressBar = () => {
     const dispatch = useDispatch()
-    const elRef = useRef();
+    // const elRef = useRef();
 
     const { currentTrack, playlistTracks, playlistInfo, isPlaying } = useSelector(state => state.playlistModule)
     let interval = null
     const [passedTime, setPassedTime] = useState(null)
+    const [progressValue, setProgressValue] = useState(null)
+
 
     useEffect(() => {
         if (currentTrack.data) {
@@ -36,7 +38,7 @@ export const PlaybackProgressBar = () => {
                 }
                 else {
                     setPassedTime(currentTrack.data?.currentTime)
-                    elRef.current.value = ((currentTrack.data?.currentTime / currentTrack.data.duration) * 100)
+                    setProgressValue((currentTrack.data?.currentTime / currentTrack.data.duration) * 100)
                 }
             }
         }, 1000);
@@ -60,7 +62,7 @@ export const PlaybackProgressBar = () => {
     return (
         <section className="main-progress-bar">
             <p>{timeFormat(passedTime)}</p>
-            <progress ref={elRef} value="0" max="100">  </progress>
+            <progress value={progressValue} max="100">  </progress>
             <p className="total-time" >{timeFormat(currentTrack?.data?.duration)}</p>
         </section >
     )
