@@ -5,26 +5,21 @@ import { setPlaylistHeadrInfo, setPlaylistTracks, setIsPlaying, setCurrentTrackI
 import { ReactComponent as PlaylistPlay } from '../assets/imgs/playlist-play.svg'
 import { ReactComponent as PlaylistPause } from '../assets/imgs/playlist-pause.svg'
 
-
 export const PlayList = ({ playlist }) => {
     const dispatch = useDispatch()
     const { isPlaying, currentTrack, playlistInfo, playlistTracks } = useSelector(state => state.playlistModule)
     const [localIsPlaying, setLocalIsPlaying] = useState(false)
-
     const { playlist_id, name, description, image_url } = playlist
 
     useEffect(() => {
-
-        const onplay = async () => {
+        const onPlay = async () => {
             if (playlistTracks.length > 0) {
                 if (playlist_id === playlistInfo?.playlist_id) {
-                    // if (localIsPlaying) setLocalIsPlaying(false)
-                    // if (isPlaying) await dispatch(setIsPlaying(false))
                     onPlayFirstSong()
                 }
             }
         }
-        onplay()
+        onPlay()
         return () => {
             setLocalIsPlaying(false)
         }
@@ -66,12 +61,9 @@ export const PlayList = ({ playlist }) => {
     }
 
     const OnPause = async () => {
-
         setLocalIsPlaying(false)
         await dispatch(setIsPlaying(false))
     }
-
-
 
     return (
         <section key={playlist_id} className="playlist-card">

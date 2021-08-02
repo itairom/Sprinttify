@@ -55,4 +55,21 @@
         flex-basis: 125px;
         margin-right: 20px;
     }
+
+    @include for-normal-layout {
+        font-size: 14px;
+        .heart-container {
+        padding: 12px 0;
+        }
+     
+        
+    }
+    @include for-wide-layout {
+        font-size: 16px;
+        .heart-container {
+        padding: 14px 0;
+        }
+    }
+
+
 }

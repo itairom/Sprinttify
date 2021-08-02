@@ -4,7 +4,7 @@
 .main-container {
   display: grid;
   grid-template-columns: 50px 1fr 50px;
-  background-color:#edf6ed;
+  background-color:$clr1;
 
   
   > * {

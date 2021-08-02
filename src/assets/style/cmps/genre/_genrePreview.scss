@@ -1,9 +1,9 @@
 .genre-preview {
     display: flex;
     color: white;
-    width: 350px;
-    height: 350px;
-    font-size: 36px;
+    width: 250px;
+    height: 250px;
+    font-size: 30px;
     // background-image: url(http://api.sprintt.co/spotify/images/world/w_10.jpg);
     background-color: rgba(0, 0, 0, 0.474);
     background-blend-mode: darken;
@@ -13,9 +13,20 @@
     align-items: center;
     justify-content: center;
     border-radius: 30px;
-
+    
     p {
         font-weight: bold;
         text-transform: capitalize;
     }
+    
+    
+    @include for-wide-layout {
+        // width: 220px;
+        // height: 220px;
+        font-size: 30px;
+        width: 350px;
+        height: 350px;
+        
+    }
+
 }

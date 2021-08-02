@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { setPlaylistTracks } from '../actions/PlaylistAction'
 import { playlistService } from '../services/playlistService'
-import { PlayList } from '../cmps/PlayList'
 import { PlayListCarousel } from '../cmps/PlayListCarousel'
-import { useLocation, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { PlaylistHeader } from '../cmps/PlaylistHeader'
 
