@@ -1,12 +1,24 @@
-.liked-page{
+.liked-page {
     height: 100vh;
     // width: 100vw;
     // background-color:$clr1;
     // margin-top: 220px;
     // padding-left: 220px;
     // margin-bottom: 100px;
-    
+
+    .heart-container {
+        @include for-normal-layout {
+            font-size: 18px;
+            .heart-container {
+                padding: 14px 0;
+            }
+            // background-color: aquamarine;
+        }
+        @include for-wide-layout {
+            font-size: 16px;
+            .heart-container {
+                padding: 14px 0;
+            }
+        }
+    }
 }
-
-
-

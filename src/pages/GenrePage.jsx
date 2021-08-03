@@ -19,10 +19,14 @@ export const GenrePage = ({ match, props }) => {
         getPlaylists()
     }, [])
 
+    useEffect(()=>{
+        console.log('🧕🏻',browseGenre);
+    },[browseGenre])
+
 
     return (
         <section className="main-container page genre-page">
-            <h1>Genre</h1>
+           {!browseGenre&& <h1>Genre</h1>}
             <div className="genre-playlists">
                 <PlaylistHeader genreLength={playlists.length} genre={browseGenre} />
                 {<PlayListCarousel playlists={playlists} playlistName={browseGenre} />}
