@@ -4,14 +4,11 @@ import { setIsPlaying, setCurrentTrackInfo, setCurrentTrackData } from '../../ac
 import { playlistService } from '../../services/playlistService'
 
 export const PlaybackProgressBar = () => {
-    const dispatch = useDispatch()
-    // const elRef = useRef();
-
-    const { currentTrack, playlistTracks, playlistInfo, isPlaying } = useSelector(state => state.playlistModule)
-    let progressInterval = null
     const [passedTime, setPassedTime] = useState(null)
     const [progressValue, setProgressValue] = useState(null)
-
+    let progressInterval = null
+    const { currentTrack, playlistTracks, playlistInfo, isPlaying } = useSelector(state => state.playlistModule)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (currentTrack.data) {
@@ -25,26 +22,24 @@ export const PlaybackProgressBar = () => {
 
     useEffect(() => {
         progressInterval = setInterval(passedTimeInterval, 1000);
-        return ()=>{
-        clearInterval(progressInterval)
+        return () => {
+            clearInterval(progressInterval)
         }
     }, [currentTrack?.data?.duration])
 
-    const passedTimeInterval = () => {
-        setInterval(async () => {
-            if (currentTrack.data?.currentTime) {
-                if (currentTrack.data?.currentTime === currentTrack.data?.duration) {
-                    console.log('song ended');
-                    await dispatch(setIsPlaying(false))
-                    currentTrack.data.pause()
-                    onNextTrack()
-                }
-                else {
-                    setPassedTime(currentTrack.data?.currentTime)
-                    setProgressValue((currentTrack.data?.currentTime / currentTrack.data.duration) * 100)
-                }
+    const passedTimeInterval = async () => {
+        if (currentTrack.data?.currentTime) {
+            if (currentTrack.data?.currentTime === currentTrack.data?.duration) {
+                await dispatch(setIsPlaying(false))
+                currentTrack.data.pause()
+                onNextTrack()
             }
-        }, 1000);
+            else {
+                console.log(currentTrack.data?.currentTime);
+                setPassedTime(currentTrack.data?.currentTime)
+                setProgressValue((currentTrack.data?.currentTime / currentTrack.data.duration) * 100)
+            }
+        }
     }
     const onNextTrack = async () => {
         const nextTrack = playlistService.playNextTrack(playlistTracks, currentTrack.info.track_id)
@@ -65,7 +60,7 @@ export const PlaybackProgressBar = () => {
     return (
         <section className="main-progress-bar">
             <p>{timeFormat(passedTime)}</p>
-            <progress value={progressValue} max="100">  </progress>
+            <progress value={progressValue} max="100"></progress>
             <p className="total-time" >{timeFormat(currentTrack?.data?.duration)}</p>
         </section >
     )
