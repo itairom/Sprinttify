@@ -8,7 +8,7 @@ export const PlaybackProgressBar = () => {
     // const elRef = useRef();
 
     const { currentTrack, playlistTracks, playlistInfo, isPlaying } = useSelector(state => state.playlistModule)
-    let interval = null
+    let progressInterval = null
     const [passedTime, setPassedTime] = useState(null)
     const [progressValue, setProgressValue] = useState(null)
 
@@ -24,7 +24,10 @@ export const PlaybackProgressBar = () => {
     }, [isPlaying])
 
     useEffect(() => {
-        interval = setInterval(passedTimeInterval, 1000);
+        progressInterval = setInterval(passedTimeInterval, 1000);
+        return ()=>{
+        clearInterval(progressInterval)
+        }
     }, [currentTrack?.data?.duration])
 
     const passedTimeInterval = () => {
